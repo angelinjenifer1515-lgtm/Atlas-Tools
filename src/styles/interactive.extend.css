@@ -1,0 +1,9 @@
+/* Extend interactive float selectors to include card-elev and tool-card variants */
+:root{--float-amp-default:3px;}
+
+/* Add card-elev and category tools to the automatic float/hover system */
+.card-elev,
+.card-elev.group,
+.card-elev.group .group:hover {
+  /* keep existing visuals — float applied via shared selectors */
+}
