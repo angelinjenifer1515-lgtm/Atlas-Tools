@@ -1,24 +1,48 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Nav } from "@/components/atlas/Nav";
+import { Hero } from "@/components/atlas/Hero";
+import { Categories } from "@/components/atlas/Categories";
+import { BuiltForImpact } from "@/components/atlas/BuiltForImpact";
+import { PowerfulTools } from "@/components/atlas/PowerfulTools";
+import { Testimonials } from "@/components/atlas/Testimonials";
+import { FinalCTA } from "@/components/atlas/FinalCTA";
+import { Footer } from "@/components/atlas/Footer";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "Atlas Tools — Everything. Beautifully Organized." },
+      {
+        name: "description",
+        content:
+          "Atlas Tools is the internet's most thoughtfully crafted collection of online utilities. Hundreds of premium tools, free forever, running instantly in your browser.",
+      },
+      { property: "og:title", content: "Atlas Tools — Everything. Beautifully Organized." },
+      {
+        property: "og:description",
+        content:
+          "Hundreds of beautifully crafted online tools. Free forever, instant, private.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Atlas Tools" },
+      { name: "twitter:description", content: "Everything. Beautifully Organized." },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <main className="relative min-h-screen w-full overflow-x-clip bg-[#050505] text-white">
+      <Nav />
+      <Hero />
+      <Categories />
+      <BuiltForImpact />
+      <PowerfulTools />
+      <Testimonials />
+      <FinalCTA />
+      <Footer />
+    </main>
   );
 }
