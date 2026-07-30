@@ -38,7 +38,7 @@ function Index() {
   useAssignFloating();
 
   return (
-    <main className="relative min-h-screen w-full overflow-x-clip bg-[#050505] text-white">
+    <main className="relative min-h-screen w-full overflow-x-clip bg-transparent text-white [perspective:1600px]">
       <InteractiveBackground />
       <Nav />
       <Hero />
