@@ -7,7 +7,8 @@ import { PowerfulTools } from "@/components/atlas/PowerfulTools";
 import { Testimonials } from "@/components/atlas/Testimonials";
 import { FinalCTA } from "@/components/atlas/FinalCTA";
 import { Footer } from "@/components/atlas/Footer";
-import { VariantSwitcher } from "@/components/variants/VariantSwitcher";
+import { InteractiveBackground } from "@/components/atlas/InteractiveBackground";
+import { useAssignFloating } from "@/hooks/useAssignFloating";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -34,8 +35,11 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
+  useAssignFloating();
+
   return (
     <main className="relative min-h-screen w-full overflow-x-clip bg-[#050505] text-white">
+      <InteractiveBackground />
       <Nav />
       <Hero />
       <Categories />
@@ -44,8 +48,6 @@ function Index() {
       <Testimonials />
       <FinalCTA />
       <Footer />
-      <VariantSwitcher />
-
     </main>
   );
 }

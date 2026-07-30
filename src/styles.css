@@ -158,25 +158,11 @@
     box-shadow: 0 12px 40px -8px rgba(79,140,255,0.35), inset 0 1px 0 rgba(255,255,255,0.2);
   }
 
-  @keyframes atlas-drift {
-    0%, 100% { transform: translate3d(0,0,0); }
-    50% { transform: translate3d(0,-6px,0); }
-  }
-  .anim-drift { animation: atlas-drift 8s ease-in-out infinite; }
+  /* legacy drift/shimmer removed — replaced by interactive.css */
 
   @keyframes atlas-orbit-fade {
     0%, 100% { opacity: 0; transform: translateY(4px); }
     20%, 80% { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes atlas-shine {
-    0% { background-position: -200% 0; }
-    100% { background-position: 200% 0; }
-  }
-  .shine {
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
-    background-size: 200% 100%;
-    animation: atlas-shine 3s linear infinite;
   }
 
   @keyframes atlas-pulse {

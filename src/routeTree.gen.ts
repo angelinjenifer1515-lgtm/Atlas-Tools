@@ -10,53 +10,33 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as VInteractiveRouteImport } from './routes/v/interactive'
-import { Route as VTestimonialsRouteImport } from './routes/v/testimonials'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const VInteractiveRoute = VInteractiveRouteImport.update({
-  id: '/v/interactive',
-  path: '/v/interactive',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const VTestimonialsRoute = VTestimonialsRouteImport.update({
-  id: '/v/testimonials',
-  path: '/v/testimonials',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/v/interactive': typeof VInteractiveRoute
-  '/v/testimonials': typeof VTestimonialsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/v/interactive': typeof VInteractiveRoute
-  '/v/testimonials': typeof VTestimonialsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/v/interactive': typeof VInteractiveRoute
-  '/v/testimonials': typeof VTestimonialsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/v/interactive' | '/v/testimonials'
+  fullPaths: '/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/v/interactive' | '/v/testimonials'
-  id: '__root__' | '/' | '/v/interactive' | '/v/testimonials'
+  to: '/'
+  id: '__root__' | '/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  VInteractiveRoute: typeof VInteractiveRoute
-  VTestimonialsRoute: typeof VTestimonialsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -68,28 +48,22 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/v/interactive': {
-      id: '/v/interactive'
-      path: '/v/interactive'
-      fullPath: '/v/interactive'
-      preLoaderRoute: typeof VInteractiveRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/v/testimonials': {
-      id: '/v/testimonials'
-      path: '/v/testimonials'
-      fullPath: '/v/testimonials'
-      preLoaderRoute: typeof VTestimonialsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  VInteractiveRoute: VInteractiveRoute,
-  VTestimonialsRoute: VTestimonialsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
