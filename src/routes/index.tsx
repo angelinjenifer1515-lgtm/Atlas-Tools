@@ -44,6 +44,8 @@ function Index() {
       <Testimonials />
       <FinalCTA />
       <Footer />
+      <VariantSwitcher />
+
     </main>
   );
 }
