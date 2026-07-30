@@ -1,9 +1,12 @@
-/* Extend interactive float selectors to include card-elev and tool-card variants */
-:root{--float-amp-default:3px;}
+/* Hover lift for elements that are themselves floating:
+   pause the drift and apply a small, elegant lift + scale. */
+.floatable:hover,
+.anim-drift:hover {
+  animation-play-state: paused;
+}
 
-/* Add card-elev and category tools to the automatic float/hover system */
-.card-elev,
-.card-elev.group,
-.card-elev.group .group:hover {
-  /* keep existing visuals — float applied via shared selectors */
+.card-elev.floatable:hover,
+.glass.floatable:hover,
+.floatable:hover {
+  transition: transform var(--hover-transition);
 }
