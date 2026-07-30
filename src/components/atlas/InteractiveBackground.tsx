@@ -1,5 +1,6 @@
 import React from "react";
 import "@/styles/interactive.css";
+import "@/styles/interactive.extend.css";
 
 export function InteractiveBackground() {
   return (
