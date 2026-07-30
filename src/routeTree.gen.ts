@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as VInteractiveRouteImport } from './routes/v/interactive'
+import { Route as VTestimonialsRouteImport } from './routes/v/testimonials'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,31 +23,40 @@ const VInteractiveRoute = VInteractiveRouteImport.update({
   path: '/v/interactive',
   getParentRoute: () => rootRouteImport,
 } as any)
+const VTestimonialsRoute = VTestimonialsRouteImport.update({
+  id: '/v/testimonials',
+  path: '/v/testimonials',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/v/interactive': typeof VInteractiveRoute
+  '/v/testimonials': typeof VTestimonialsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/v/interactive': typeof VInteractiveRoute
+  '/v/testimonials': typeof VTestimonialsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/v/interactive': typeof VInteractiveRoute
+  '/v/testimonials': typeof VTestimonialsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/v/interactive'
+  fullPaths: '/' | '/v/interactive' | '/v/testimonials'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/v/interactive'
-  id: '__root__' | '/' | '/v/interactive'
+  to: '/' | '/v/interactive' | '/v/testimonials'
+  id: '__root__' | '/' | '/v/interactive' | '/v/testimonials'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   VInteractiveRoute: typeof VInteractiveRoute
+  VTestimonialsRoute: typeof VTestimonialsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +75,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VInteractiveRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/v/testimonials': {
+      id: '/v/testimonials'
+      path: '/v/testimonials'
+      fullPath: '/v/testimonials'
+      preLoaderRoute: typeof VTestimonialsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   VInteractiveRoute: VInteractiveRoute,
+  VTestimonialsRoute: VTestimonialsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

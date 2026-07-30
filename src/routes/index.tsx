@@ -7,6 +7,7 @@ import { PowerfulTools } from "@/components/atlas/PowerfulTools";
 import { Testimonials } from "@/components/atlas/Testimonials";
 import { FinalCTA } from "@/components/atlas/FinalCTA";
 import { Footer } from "@/components/atlas/Footer";
+import { VariantSwitcher } from "@/components/variants/VariantSwitcher";
 
 export const Route = createFileRoute("/")({
   head: () => ({
