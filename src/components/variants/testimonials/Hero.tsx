@@ -1,7 +1,7 @@
-import { StarField } from "./StarField";
-import { Globe } from "./Globe";
-import { OrbitLabels } from "./OrbitLabels";
-import { MagneticButton } from "./MagneticButton";
+import { StarField } from "@/components/atlas/StarField";
+import { Globe } from "@/components/atlas/Globe";
+import { OrbitLabels } from "@/components/atlas/OrbitLabels";
+import { MagneticButton } from "@/components/atlas/MagneticButton";
 import { ArrowRight } from "lucide-react";
 
 export function Hero() {
