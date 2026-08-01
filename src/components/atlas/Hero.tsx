@@ -40,10 +40,28 @@ export function Hero() {
 
         {/* Right: globe stage */}
         <div className="relative h-[420px] w-full sm:h-[520px] md:h-[600px] lg:h-[680px]">
-          <div className="absolute inset-0">
+          {/* atmospheric bloom that seats the globe inside the environment */}
+          <div
+            className="pointer-events-none absolute -inset-[18%]"
+            style={{
+              background:
+                "radial-gradient(closest-side, rgba(124,92,255,0.20), rgba(79,140,255,0.10) 46%, rgba(26,20,70,0.10) 66%, transparent 82%)",
+              filter: "blur(46px)",
+            }}
+          />
+          <div className="absolute inset-0 mask-fade-radial">
             <Globe />
             <OrbitLabels />
           </div>
+          {/* low fog so the ring dissolves rather than ends */}
+          <div
+            className="pointer-events-none absolute inset-x-[-10%] bottom-[-12%] h-[45%]"
+            style={{
+              background:
+                "radial-gradient(60% 100% at 50% 100%, rgba(26,20,70,0.55), transparent 72%)",
+              filter: "blur(38px)",
+            }}
+          />
         </div>
       </div>
 
@@ -55,7 +73,15 @@ export function Hero() {
         <StatsRow />
       </div>
 
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-[#050505]" />
+      {/* seamless hand-off into the page atmosphere */}
+      <div
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-64"
+        style={{
+          background:
+            "linear-gradient(to bottom, transparent, rgba(26,20,70,0.14) 45%, rgba(124,92,255,0.07) 78%, transparent)",
+        }}
+      />
+
     </section>
   );
 }
