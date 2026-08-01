@@ -34,31 +34,40 @@
 .layer-1{
   background:
     radial-gradient(48% 36% at 22% 28%, rgba(124,92,255,0.55), transparent 62%),
-    radial-gradient(38% 30% at 62% 12%, rgba(90,77,255,0.32), transparent 65%);
+    radial-gradient(38% 30% at 62% 12%, rgba(26,20,70,0.55), transparent 65%);
   opacity: .50;
-  animation: aurora-1 118s var(--float-easing) infinite;
+  animation: aurora-1 34s var(--float-easing) infinite;
 }
 .layer-2{
   background:
     radial-gradient(44% 34% at 78% 46%, rgba(142,123,255,0.48), transparent 63%),
-    radial-gradient(34% 26% at 40% 66%, rgba(79,140,255,0.30), transparent 66%);
-  opacity: .42;
-  animation: aurora-2 143s var(--float-easing) infinite;
+    radial-gradient(34% 26% at 40% 66%, rgba(79,140,255,0.32), transparent 66%);
+  opacity: .44;
+  animation: aurora-2 47s var(--float-easing) infinite;
 }
 .layer-3{
   background:
     radial-gradient(52% 32% at 46% 84%, rgba(79,140,255,0.40), transparent 64%),
-    radial-gradient(30% 24% at 12% 62%, rgba(124,92,255,0.28), transparent 68%);
-  opacity: .34;
-  animation: aurora-3 167s var(--float-easing) infinite;
+    radial-gradient(30% 24% at 12% 62%, rgba(26,20,70,0.60), transparent 68%);
+  opacity: .38;
+  animation: aurora-3 58s var(--float-easing) infinite;
 }
-/* wide volumetric sweep — very low opacity, feels rather than shows */
+/* wide volumetric silk sweep — very low opacity, feels rather than shows */
 .layer-4{
   background:
-    linear-gradient(112deg, rgba(90,77,255,0.00) 22%, rgba(142,123,255,0.22) 48%, rgba(79,140,255,0.00) 74%);
-  opacity: .30;
+    linear-gradient(112deg, rgba(26,20,70,0.00) 18%, rgba(142,123,255,0.24) 46%, rgba(79,140,255,0.14) 62%, rgba(79,140,255,0.00) 82%);
+  opacity: .32;
   filter: blur(160px) saturate(120%);
-  animation: aurora-4 191s var(--float-easing) infinite;
+  animation: aurora-4 41s var(--float-easing) infinite;
+}
+/* slow liquid caustic drift */
+.layer-5{
+  background:
+    radial-gradient(40% 60% at 66% 72%, rgba(124,92,255,0.30), transparent 66%),
+    linear-gradient(288deg, rgba(79,140,255,0.00) 26%, rgba(79,140,255,0.18) 52%, rgba(26,20,70,0.00) 78%);
+  opacity: .28;
+  filter: blur(150px) saturate(130%);
+  animation: aurora-5 53s var(--float-easing) infinite;
 }
 
 @keyframes aurora-1{
@@ -84,6 +93,12 @@
   50%  { transform: translate3d(8%,3%,0) scale(1.3) rotate(6deg);   opacity:.34; }
   100% { transform: translate3d(-8%,0,0) scale(1.2) rotate(0deg);   opacity:.22; }
 }
+@keyframes aurora-5{
+  0%   { transform: translate3d(6%,-4%,0) scale(1.15) rotate(0deg);  opacity:.20; }
+  44%  { transform: translate3d(-7%,4%,0) scale(1.28) rotate(-5deg); opacity:.32; }
+  100% { transform: translate3d(6%,-4%,0) scale(1.15) rotate(0deg);  opacity:.20; }
+}
+
 
 /* ---------------------------------------------------------------
    Depth / 3D stage
