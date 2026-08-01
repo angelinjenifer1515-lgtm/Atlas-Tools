@@ -9,6 +9,7 @@ export function InteractiveBackground() {
       <div className="bg-layer layer-2" />
       <div className="bg-layer layer-3" />
       <div className="bg-layer layer-4" />
+      <div className="bg-layer layer-5" />
       {/* feathered ambient light patches */}
       <div
         className="ambient-glow"
@@ -20,8 +21,9 @@ export function InteractiveBackground() {
       />
       <div
         className="ambient-glow"
-        style={{ bottom: "-12%", left: "28%", width: "50vw", height: "38vw", background: "radial-gradient(closest-side, rgba(142,123,255,0.12), transparent 72%)" }}
+        style={{ bottom: "-12%", left: "28%", width: "50vw", height: "38vw", background: "radial-gradient(closest-side, rgba(26,20,70,0.28), transparent 72%)" }}
       />
+
     </div>
   );
 }

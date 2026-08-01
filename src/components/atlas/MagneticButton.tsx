@@ -25,7 +25,7 @@ export function MagneticButton({ variant = "primary", children, className = "", 
 
   const styles = variant === "primary"
     ? "bg-white text-black shadow-[0_10px_40px_-12px_rgba(255,255,255,0.35)] hover:bg-white"
-    : "text-white/85 hover:text-white border border-white/10 bg-white/[0.03] hover:bg-white/[0.06]";
+    : "glass overflow-hidden text-white/85 hover:text-white";
 
   return (
     <button
