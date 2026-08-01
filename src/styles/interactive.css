@@ -35,28 +35,28 @@
   background:
     radial-gradient(48% 36% at 22% 28%, rgba(124,92,255,0.55), transparent 62%),
     radial-gradient(38% 30% at 62% 12%, rgba(26,20,70,0.55), transparent 65%);
-  opacity: .50;
+  opacity: .34;
   animation: aurora-1 34s var(--float-easing) infinite;
 }
 .layer-2{
   background:
     radial-gradient(44% 34% at 78% 46%, rgba(142,123,255,0.48), transparent 63%),
     radial-gradient(34% 26% at 40% 66%, rgba(79,140,255,0.32), transparent 66%);
-  opacity: .44;
+  opacity: .30;
   animation: aurora-2 47s var(--float-easing) infinite;
 }
 .layer-3{
   background:
     radial-gradient(52% 32% at 46% 84%, rgba(79,140,255,0.40), transparent 64%),
     radial-gradient(30% 24% at 12% 62%, rgba(26,20,70,0.60), transparent 68%);
-  opacity: .38;
+  opacity: .26;
   animation: aurora-3 58s var(--float-easing) infinite;
 }
 /* wide volumetric silk sweep — very low opacity, feels rather than shows */
 .layer-4{
   background:
     linear-gradient(112deg, rgba(26,20,70,0.00) 18%, rgba(142,123,255,0.24) 46%, rgba(79,140,255,0.14) 62%, rgba(79,140,255,0.00) 82%);
-  opacity: .32;
+  opacity: .24;
   filter: blur(160px) saturate(120%);
   animation: aurora-4 41s var(--float-easing) infinite;
 }
@@ -65,7 +65,7 @@
   background:
     radial-gradient(40% 60% at 66% 72%, rgba(124,92,255,0.30), transparent 66%),
     linear-gradient(288deg, rgba(79,140,255,0.00) 26%, rgba(79,140,255,0.18) 52%, rgba(26,20,70,0.00) 78%);
-  opacity: .28;
+  opacity: .20;
   filter: blur(150px) saturate(130%);
   animation: aurora-5 53s var(--float-easing) infinite;
 }
