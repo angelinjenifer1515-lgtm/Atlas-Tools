@@ -6,10 +6,13 @@ import { ArrowRight } from "lucide-react";
 
 export function Hero() {
   return (
-    <section className="relative isolate w-full overflow-hidden bg-[#050505] pt-32 pb-24 md:pt-40 md:pb-32">
-      <div className="absolute inset-0 radial-vignette" />
-      <StarField density={1.0} />
-      <div className="pointer-events-none absolute inset-0 grain" />
+    <section className="relative isolate w-full overflow-hidden bg-transparent pt-32 pb-24 md:pt-40 md:pb-32">
+      <div className="pointer-events-none absolute inset-0 radial-vignette" />
+      <div className="mask-fade-b absolute inset-0">
+        <StarField density={1.0} />
+      </div>
+      <div className="pointer-events-none absolute inset-0 grain mask-fade-b" />
+
 
       <div className="relative mx-auto grid max-w-7xl grid-cols-1 items-center gap-10 px-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)]">
         {/* Left: copy */}
