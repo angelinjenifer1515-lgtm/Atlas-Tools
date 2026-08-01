@@ -40,14 +40,37 @@ export function BuiltForImpact() {
         {/* Ring + counter */}
         <div className="relative mt-20">
           <div className="relative mx-auto flex h-[280px] w-full max-w-4xl items-center justify-center sm:h-[360px]">
+            {/* background illumination the ring sits inside */}
+            <div
+              className="pointer-events-none absolute -inset-x-[12%] -inset-y-[28%]"
+              style={{
+                background:
+                  "radial-gradient(closest-side, rgba(124,92,255,0.20), rgba(79,140,255,0.09) 48%, rgba(26,20,70,0.08) 70%, transparent 85%)",
+                filter: "blur(56px)",
+              }}
+            />
             <img
               src={ring}
               alt=""
               loading="lazy"
-              className="absolute inset-0 h-full w-full object-contain opacity-90"
+              className="absolute inset-0 h-full w-full object-contain opacity-85 mix-blend-screen"
+              style={{
+                maskImage:
+                  "radial-gradient(62% 58% at 50% 50%, #000 32%, rgba(0,0,0,0.72) 58%, rgba(0,0,0,0.25) 78%, transparent 92%)",
+              }}
             />
-            <div className="pointer-events-none absolute inset-x-0 top-1/2 h-24 -translate-y-1/2 bg-[radial-gradient(closest-side,rgba(124,92,240,0.25),transparent_70%)]" />
+            {/* atmospheric fog dissolving the lower edge */}
+            <div
+              className="pointer-events-none absolute inset-x-[-8%] bottom-[-18%] h-[55%]"
+              style={{
+                background:
+                  "radial-gradient(60% 100% at 50% 100%, rgba(26,20,70,0.45), transparent 74%)",
+                filter: "blur(40px)",
+              }}
+            />
+            <div className="pointer-events-none absolute inset-x-0 top-1/2 h-24 -translate-y-1/2 bg-[radial-gradient(closest-side,rgba(124,92,240,0.22),transparent_70%)]" />
           </div>
+
 
           <div className="mt-8 flex flex-col items-center gap-3">
             <div className="flex items-center gap-4">
