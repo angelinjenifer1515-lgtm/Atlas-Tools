@@ -1,7 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ChevronRight } from "lucide-react";
 import { PageShell } from "@/components/tools/PageShell";
-import { CATEGORY_BY_SLUG, toolsInCategory, type CategorySlug } from "@/lib/tools/registry";
+import { CATEGORY_BY_SLUG, toolsInCategory, type CategorySlug, type ToolMeta } from "@/lib/tools/registry";
 
 export const Route = createFileRoute("/categories/$categorySlug")({
   loader: ({ params }) => {
@@ -51,7 +51,7 @@ function CategoryPage() {
         </header>
 
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {tools.map((tool) => (
+          {tools.map((tool: ToolMeta) => (
             <Link
               key={tool.slug}
               to="/tools/$toolSlug"
