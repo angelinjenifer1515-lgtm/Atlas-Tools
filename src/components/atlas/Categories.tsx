@@ -1,19 +1,16 @@
 import { ArrowRight } from "lucide-react";
+import { Link } from "@tanstack/react-router";
+import type { CategorySlug } from "@/lib/tools/registry";
 import catAi from "@/assets/cat-ai.jpg";
 import catPdf from "@/assets/cat-pdf.jpg";
 import catImage from "@/assets/cat-image.jpg";
 import catDev from "@/assets/cat-dev.jpg";
 import catConvert from "@/assets/cat-convert.jpg";
 
-type Cat = { title: string; count: string; desc: string; image: string; glow: string };
+type Cat = { title: string; count: string; desc: string; image: string; glow: string; slug: CategorySlug };
 
 const CATS: Cat[] = [
-  { title: "AI Tools",         count: "12 tools", desc: "Smart utilities for modern problems",   image: catAi,      glow: "rgba(167,139,250,0.35)" },
-  { title: "PDF Tools",        count: "18 tools", desc: "All the tools you need for PDF files",  image: catPdf,     glow: "rgba(255,120,80,0.30)" },
-  { title: "Image Tools",      count: "24 tools", desc: "Edit, convert, optimize beautifully",   image: catImage,   glow: "rgba(90,220,150,0.28)" },
-  { title: "Developer Tools",  count: "15 tools", desc: "Built for speed and precision",         image: catDev,     glow: "rgba(90,150,255,0.30)" },
-  { title: "Converters",       count: "22 tools", desc: "Convert anything to everything",        image: catConvert, glow: "rgba(220,180,90,0.28)" },
-];
+  { title: "AI Tools",         count: "12 tools", desc: "Smart utilities for modern problems",   image: catAi,      glow: "rgba(167,139,250,0.35)" }, slug: "ai-tools" },  { title: "PDF Tools",        count: "18 tools", desc: "All the tools you need for PDF files",  image: catPdf,     glow: "rgba(255,120,80,0.30)" }, slug: "pdf-tools" },  { title: "Image Tools",      count: "24 tools", desc: "Edit, convert, optimize beautifully",   image: catImage,   glow: "rgba(90,220,150,0.28)" }, slug: "image-tools" },  { title: "Developer Tools",  count: "15 tools", desc: "Built for speed and precision",         image: catDev,     glow: "rgba(90,150,255,0.30)" }, slug: "developer-tools" },  { title: "Converters",       count: "22 tools", desc: "Convert anything to everything",        image: catConvert, glow: "rgba(220,180,90,0.28)" }, slug: "text-tools" },];
 
 export function Categories() {
   return (
@@ -40,22 +37,24 @@ export function Categories() {
         </div>
 
         <div className="mt-10 flex justify-center">
-          <a
-            href="#"
+          <Link
+            to="/categories"
             className="group inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-5 py-2.5 text-[13px] text-white/80 transition hover:bg-white/[0.07] hover:text-white"
           >
             View all categories
             <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
-          </a>
+          </Link>
         </div>
       </div>
     </section>
   );
 }
 
-function CategoryCard({ title, count, desc, image, glow }: Cat) {
+function CategoryCard({ title, count, desc, image, glow, slug }: Cat) {
   return (
-    <div
+    <Link
+      to="/categories/$categorySlug"
+      params={{ categorySlug: slug }}
       className="card-elev group relative flex h-[340px] flex-col overflow-hidden rounded-2xl p-5 transition-all duration-500 hover:-translate-y-1 hover:border-white/[0.14]"
       style={{
         boxShadow: `inset 0 1px 0 rgba(255,255,255,0.04), 0 20px 40px -20px rgba(0,0,0,0.6)`,
@@ -90,14 +89,11 @@ function CategoryCard({ title, count, desc, image, glow }: Cat) {
           {title}
         </h3>
         <p className="mt-1 text-[12.5px] leading-relaxed text-white/55">{desc}</p>
-        <a
-          href="#"
-          className="mt-3 inline-flex items-center gap-1 text-[12px] text-white/70 transition hover:text-white"
-        >
+        <span className="mt-3 inline-flex items-center gap-1 text-[12px] text-white/70 transition group-hover:text-white">
           Explore
           <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
-        </a>
+        </span>
       </div>
-    </div>
+    </Link>
   );
 }

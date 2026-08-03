@@ -41,7 +41,7 @@ export function Nav() {
   );
 }
 
-function NavLink({ children, to }: { children: React.ReactNode; to: string }) {
+function NavLink({ children, to }: { children: React.ReactNode; to: "/tools" | "/categories" }) {
   return (
     <Link
       to={to}
