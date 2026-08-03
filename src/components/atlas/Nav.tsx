@@ -20,7 +20,9 @@ export function Nav() {
         }`}
       >
 
-        <AtlasWordmark />
+        <Link to="/" aria-label="Atlas Tools home">
+          <AtlasWordmark />
+        </Link>
         <div className="hidden items-center gap-1 md:flex">
           <NavLink to="/tools">All Tools</NavLink>
           <NavLink to="/categories">
