@@ -32,7 +32,12 @@ export function Hero() {
           </p>
 
           <div className="mt-9 flex flex-wrap items-center gap-4">
-            <MagneticButton variant="primary">
+            <MagneticButton
+              variant="primary"
+              onClick={() =>
+                document.getElementById("categories")?.scrollIntoView({ behavior: "smooth", block: "start" })
+              }
+            >
               Explore Tools <ArrowRight className="h-4 w-4" />
             </MagneticButton>
           </div>

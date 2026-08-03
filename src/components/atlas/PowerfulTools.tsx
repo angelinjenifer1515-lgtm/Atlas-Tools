@@ -1,4 +1,5 @@
 import { ArrowRight, ImageIcon, FileText, Scissors, Sparkles } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 
 export function PowerfulTools() {
   return (
@@ -14,6 +15,7 @@ export function PowerfulTools() {
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <ToolCard
             Icon={ImageIcon}
+            slug="image-compressor"
             title="Image Compressor"
             desc="Reduce image size without losing quality"
             action="Compress"
@@ -25,6 +27,7 @@ export function PowerfulTools() {
           />
           <ToolCard
             Icon={FileText}
+            slug="merge-pdf"
             title="PDF Merger"
             desc="Merge multiple PDFs into one file"
             action="Merge PDF"
@@ -37,6 +40,7 @@ export function PowerfulTools() {
           />
           <ToolCard
             Icon={Scissors}
+            slug="background-remover"
             title="Background Remover"
             desc="Remove background in one click"
             action="Remove"
@@ -53,6 +57,7 @@ export function PowerfulTools() {
           />
           <ToolCard
             Icon={Sparkles}
+            slug="ai-summarizer"
             title="AI Writer"
             desc="Write better, faster with AI"
             action="Generate"
@@ -69,13 +74,13 @@ export function PowerfulTools() {
         </div>
 
         <div className="mt-10 flex justify-center">
-          <a
-            href="#"
+          <Link
+            to="/tools"
             className="group inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-5 py-2.5 text-[13px] text-white/80 transition hover:bg-white/[0.07] hover:text-white"
           >
             View all tools
             <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
-          </a>
+          </Link>
         </div>
       </div>
     </section>
@@ -83,13 +88,16 @@ export function PowerfulTools() {
 }
 
 function ToolCard({
-  Icon, title, desc, action, preview,
+  Icon, title, desc, action, preview, slug,
 }: {
   Icon: React.ComponentType<{ className?: string }>;
-  title: string; desc: string; action: string; preview: React.ReactNode;
+  title: string; desc: string; action: string; preview: React.ReactNode; slug: string;
 }) {
   return (
-    <div className="card-elev group relative flex h-[300px] flex-col overflow-hidden rounded-2xl p-4 transition-all duration-500 hover:-translate-y-0.5 hover:border-white/[0.14]">
+    <Link
+      to="/tools/$toolSlug"
+      params={{ toolSlug: slug }}
+      className="card-elev group relative flex h-[300px] flex-col overflow-hidden rounded-2xl p-4 transition-all duration-500 hover:-translate-y-0.5 hover:border-white/[0.14]">
       <div className="h-[120px] w-full overflow-hidden rounded-lg border border-white/[0.05]">
         {preview}
       </div>
@@ -100,9 +108,9 @@ function ToolCard({
           <p className="mt-0.5 text-[12px] leading-relaxed text-white/55">{desc}</p>
         </div>
       </div>
-      <button className="mt-auto self-start rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-[11px] text-white/80 transition hover:bg-[color:var(--violet)]/20 hover:text-white">
+      <span className="mt-auto self-start rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-[11px] text-white/80 transition group-hover:bg-[color:var(--violet)]/20 group-hover:text-white">
         {action}
-      </button>
-    </div>
+      </span>
+    </Link>
   );
 }

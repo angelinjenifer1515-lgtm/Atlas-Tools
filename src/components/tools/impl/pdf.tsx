@@ -3,6 +3,9 @@ import { PDFDocument, degrees } from "pdf-lib";
 import { Btn, Grid, Note, Panel, Range, Select, Field, TextInput, Toolbar, UploadArea, downloadBlob } from "../ui";
 import type { ToolComponent } from "@/lib/tools/loader";
 
+const pdfBlob = (bytes: Uint8Array) =>
+  new Blob([bytes.slice().buffer as ArrayBuffer], { type: "application/pdf" });
+
 function usePdfFiles(multiple = false) {
   const [files, setFiles] = useState<File[]>([]);
   const [busy, setBusy] = useState(false);
@@ -80,7 +83,7 @@ function MergePdf() {
                 const pages = await out.copyPages(src, src.getPageIndices());
                 pages.forEach((p) => out.addPage(p));
               }
-              downloadBlob(new Blob([await out.save()], { type: "application/pdf" }), "merged.pdf");
+              downloadBlob(pdfBlob(await out.save()), "merged.pdf");
             })
           }
         >
@@ -125,7 +128,7 @@ function SplitPdf() {
               for (let i = a; i <= b; i++) idx.push(i);
               const pages = await out.copyPages(src, idx);
               pages.forEach((p) => out.addPage(p));
-              downloadBlob(new Blob([await out.save()], { type: "application/pdf" }), "split.pdf");
+              downloadBlob(pdfBlob(await out.save()), "split.pdf");
             })
           }
         >
@@ -166,7 +169,7 @@ function RotatePdf() {
             s.run(async () => {
               const doc = await PDFDocument.load(await s.files[0].arrayBuffer());
               doc.getPages().forEach((p) => p.setRotation(degrees((p.getRotation().angle + +angle) % 360)));
-              downloadBlob(new Blob([await doc.save()], { type: "application/pdf" }), "rotated.pdf");
+              downloadBlob(pdfBlob(await doc.save()), "rotated.pdf");
             })
           }
         >
@@ -204,7 +207,7 @@ function DeletePages() {
                 .filter((n) => n >= 0)
                 .sort((a, b) => b - a);
               drop.forEach((i) => i < doc.getPageCount() && doc.removePage(i));
-              downloadBlob(new Blob([await doc.save()], { type: "application/pdf" }), "edited.pdf");
+              downloadBlob(pdfBlob(await doc.save()), "edited.pdf");
             })
           }
         >
@@ -238,7 +241,7 @@ function JpgToPdf() {
                 const page = doc.addPage([img.width, img.height]);
                 page.drawImage(img, { x: 0, y: 0, width: img.width, height: img.height });
               }
-              downloadBlob(new Blob([await doc.save()], { type: "application/pdf" }), "images.pdf");
+              downloadBlob(pdfBlob(await doc.save()), "images.pdf");
             })
           }
         >
@@ -325,7 +328,7 @@ function SignPdf() {
               const doc = await PDFDocument.load(await s.files[0].arrayBuffer());
               const page = doc.getPages().at(-1);
               page?.drawText(name, { x: 60, y: 70, size: 22 });
-              downloadBlob(new Blob([await doc.save()], { type: "application/pdf" }), "signed.pdf");
+              downloadBlob(pdfBlob(await doc.save()), "signed.pdf");
             })
           }
         >
@@ -354,7 +357,7 @@ function CompressPdf() {
           onClick={() =>
             s.run(async () => {
               const doc = await PDFDocument.load(await s.files[0].arrayBuffer());
-              downloadBlob(new Blob([await doc.save({ useObjectStreams: true })], { type: "application/pdf" }), "compressed.pdf");
+              downloadBlob(pdfBlob(await doc.save({ useObjectStreams: true })), "compressed.pdf");
             })
           }
         >
