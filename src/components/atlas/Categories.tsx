@@ -10,7 +10,12 @@ import catConvert from "@/assets/cat-convert.jpg";
 type Cat = { title: string; count: string; desc: string; image: string; glow: string; slug: CategorySlug };
 
 const CATS: Cat[] = [
-  { title: "AI Tools",         count: "12 tools", desc: "Smart utilities for modern problems",   image: catAi,      glow: "rgba(167,139,250,0.35)" }, slug: "ai-tools" },  { title: "PDF Tools",        count: "18 tools", desc: "All the tools you need for PDF files",  image: catPdf,     glow: "rgba(255,120,80,0.30)" }, slug: "pdf-tools" },  { title: "Image Tools",      count: "24 tools", desc: "Edit, convert, optimize beautifully",   image: catImage,   glow: "rgba(90,220,150,0.28)" }, slug: "image-tools" },  { title: "Developer Tools",  count: "15 tools", desc: "Built for speed and precision",         image: catDev,     glow: "rgba(90,150,255,0.30)" }, slug: "developer-tools" },  { title: "Converters",       count: "22 tools", desc: "Convert anything to everything",        image: catConvert, glow: "rgba(220,180,90,0.28)" }, slug: "text-tools" },];
+  { title: "AI Tools",         count: "12 tools", desc: "Smart utilities for modern problems",   image: catAi,      glow: "rgba(167,139,250,0.35)", slug: "ai-tools" },
+  { title: "PDF Tools",        count: "18 tools", desc: "All the tools you need for PDF files",  image: catPdf,     glow: "rgba(255,120,80,0.30)", slug: "pdf-tools" },
+  { title: "Image Tools",      count: "24 tools", desc: "Edit, convert, optimize beautifully",   image: catImage,   glow: "rgba(90,220,150,0.28)", slug: "image-tools" },
+  { title: "Developer Tools",  count: "15 tools", desc: "Built for speed and precision",         image: catDev,     glow: "rgba(90,150,255,0.30)", slug: "developer-tools" },
+  { title: "Converters",       count: "22 tools", desc: "Convert anything to everything",        image: catConvert, glow: "rgba(220,180,90,0.28)", slug: "text-tools" },
+];
 
 export function Categories() {
   return (
