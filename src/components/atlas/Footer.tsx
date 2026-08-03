@@ -1,9 +1,39 @@
+import { Link } from "@tanstack/react-router";
 import { AtlasWordmark } from "./Logo";
+import type { CategorySlug } from "@/lib/tools/registry";
 
-const COLS = [
-  { title: "Tools",    items: ["PDF", "Image", "Developer", "Text", "Finance", "AI"] },
-  { title: "Platform", items: ["All Tools", "Categories", "Collections", "Changelog"] },
-  { title: "Company",  items: ["About", "Manifesto", "Contact", "Press"] },
+type Item = { label: string; category?: CategorySlug; to?: "/tools" | "/categories" | "/" };
+
+const COLS: Array<{ title: string; items: Item[] }> = [
+  {
+    title: "Tools",
+    items: [
+      { label: "PDF", category: "pdf-tools" },
+      { label: "Image", category: "image-tools" },
+      { label: "Developer", category: "developer-tools" },
+      { label: "Text", category: "text-tools" },
+      { label: "Finance", category: "calculators" },
+      { label: "AI", category: "ai-tools" },
+    ],
+  },
+  {
+    title: "Platform",
+    items: [
+      { label: "All Tools", to: "/tools" },
+      { label: "Categories", to: "/categories" },
+      { label: "Collections", to: "/categories" },
+      { label: "Changelog", to: "/tools" },
+    ],
+  },
+  {
+    title: "Company",
+    items: [
+      { label: "About", to: "/" },
+      { label: "Manifesto", to: "/" },
+      { label: "Contact", to: "/" },
+      { label: "Press", to: "/" },
+    ],
+  },
 ];
 
 export function Footer() {
@@ -22,7 +52,21 @@ export function Footer() {
               <div className="mb-4 text-[11px] uppercase tracking-[0.22em] text-white/40">{c.title}</div>
               <ul className="space-y-2.5 text-[13px] text-white/70">
                 {c.items.map((i) => (
-                  <li key={i}><a href="#" className="transition hover:text-white">{i}</a></li>
+                  <li key={i.label}>
+                    {i.category ? (
+                      <Link
+                        to="/categories/$categorySlug"
+                        params={{ categorySlug: i.category }}
+                        className="transition hover:text-white"
+                      >
+                        {i.label}
+                      </Link>
+                    ) : (
+                      <Link to={i.to ?? "/"} className="transition hover:text-white">
+                        {i.label}
+                      </Link>
+                    )}
+                  </li>
                 ))}
               </ul>
             </div>
