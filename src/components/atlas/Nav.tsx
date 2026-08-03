@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "@tanstack/react-router";
 import { AtlasWordmark } from "./Logo";
 import { ChevronDown } from "lucide-react";
 
@@ -21,31 +22,32 @@ export function Nav() {
 
         <AtlasWordmark />
         <div className="hidden items-center gap-1 md:flex">
-          <NavLink>All Tools</NavLink>
-          <NavLink>
+          <NavLink to="/tools">All Tools</NavLink>
+          <NavLink to="/categories">
             Categories <ChevronDown className="ml-0.5 h-3 w-3 opacity-60" />
           </NavLink>
-          <NavLink>Resources</NavLink>
-          <NavLink>About</NavLink>
+          <NavLink to="/tools">Resources</NavLink>
+          <NavLink to="/categories">About</NavLink>
         </div>
-        <a
-          href="#categories"
+        <Link
+          to="/"
+          hash="categories"
           className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-1.5 text-[13px] text-white/85 transition hover:bg-white/[0.08] hover:text-white"
         >
           Explore
-        </a>
+        </Link>
       </nav>
     </header>
   );
 }
 
-function NavLink({ children }: { children: React.ReactNode }) {
+function NavLink({ children, to }: { children: React.ReactNode; to: string }) {
   return (
-    <a
-      href="#"
+    <Link
+      to={to}
       className="inline-flex items-center rounded-full px-3.5 py-1.5 text-[13px] text-white/70 transition-colors hover:bg-white/[0.04] hover:text-white"
     >
       {children}
-    </a>
+    </Link>
   );
 }
