@@ -504,64 +504,6 @@ export function QrTool() {
   );
 }
 
-/* -------------------------- interface-only previews ------------------------- */
-
-function SimulatedImageTool({ label, note }: { label: string; note: string }) {
-  const { file, setFile, img } = useImage();
-  const [busy, setBusy] = useState(false);
-  const [done, setDone] = useState(false);
-  const src = useMemo(() => (file ? URL.createObjectURL(file) : ""), [file]);
-  return (
-    <>
-      <Panel title="Upload">
-        <UploadArea accept="image/*" onFiles={(f) => { setFile(f[0] ?? null); setDone(false); }} files={file ? [file] : []} />
-      </Panel>
-      <Grid>
-        <Panel title="Source">
-          <div className="flex min-h-[220px] items-center justify-center rounded-xl border border-white/[0.07] bg-black/30 p-3">
-            {src ? <img src={src} alt="Uploaded source" className="max-h-[300px] max-w-full rounded-lg" /> : <span className="text-[13px] text-white/40">No image yet</span>}
-          </div>
-        </Panel>
-        <Panel title="Result">
-          <div
-            className="flex min-h-[220px] items-center justify-center rounded-xl border border-white/[0.07] p-3"
-            style={{
-              backgroundImage:
-                "conic-gradient(from 45deg at 25% 25%, #1a1a1e 0 25%, #131316 0 50%, #1a1a1e 0 75%, #131316 0)",
-              backgroundSize: "20px 20px",
-            }}
-          >
-            {busy ? (
-              <span className="text-[13px] text-white/60">Processing…</span>
-            ) : done && src ? (
-              <img src={src} alt="Processed preview" className="max-h-[300px] max-w-full rounded-lg" />
-            ) : (
-              <span className="text-[13px] text-white/40">Run {label} to preview</span>
-            )}
-          </div>
-          <Toolbar>
-            <Btn
-              variant="primary"
-              disabled={!img || busy}
-              onClick={() => {
-                setBusy(true);
-                setTimeout(() => {
-                  setBusy(false);
-                  setDone(true);
-                }, 1400);
-              }}
-            >
-              {busy ? "Working…" : label}
-            </Btn>
-            <Btn onClick={() => { setFile(null); setDone(false); }}>Reset</Btn>
-          </Toolbar>
-          <Note>{note}</Note>
-        </Panel>
-      </Grid>
-    </>
-  );
-}
-
 export const tools: Record<string, ToolComponent> = {
   "image-compressor": Compressor,
   "image-resizer": Resizer,

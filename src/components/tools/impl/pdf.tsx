@@ -279,32 +279,6 @@ function PdfViewer() {
   );
 }
 
-function SimulatedPdf({ label, note }: { label: string; note: string }) {
-  const s = usePdfFiles();
-  const [done, setDone] = useState(false);
-  return (
-    <PdfShell
-      hint="Drop a PDF"
-      files={s.files}
-      setFiles={(f) => {
-        s.setFiles(f);
-        setDone(false);
-      }}
-      busy={s.busy}
-      note={note}
-      action={
-        <Btn
-          variant="primary"
-          disabled={!s.files.length || s.busy}
-          onClick={() => s.run(async () => { await new Promise((r) => setTimeout(r, 1200)); setDone(true); })}
-        >
-          {done ? "Done ✓" : label}
-        </Btn>
-      }
-    />
-  );
-}
-
 function SignPdf() {
   const s = usePdfFiles();
   const [name, setName] = useState("Ada Lovelace");
