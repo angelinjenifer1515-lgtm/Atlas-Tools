@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageShell } from "@/components/tools/PageShell";
+import { CategoryIcon } from "@/components/atlas/CategoryIcon";
 import { CATEGORIES, toolsInCategory } from "@/lib/tools/registry";
 
 export const Route = createFileRoute("/categories/")({
