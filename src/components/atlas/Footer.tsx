@@ -76,6 +76,13 @@ export function Footer() {
           <span>© {new Date().getFullYear()} Atlas Tools. All utilities free forever.</span>
           <span className="font-mono">v1.0 · handcrafted</span>
         </div>
+        <p className="pt-10 text-center text-[13px] leading-relaxed text-white/35">
+          © 2026 Atlas Tools. Crafted by{" "}
+          <span className="bg-gradient-to-r from-[#B9AFFF] via-[#C9C2FF] to-[#9FB6FF] bg-clip-text font-medium text-transparent opacity-80 transition-opacity duration-300 hover:opacity-100">
+            Angelin Jenifer
+          </span>
+          . All rights reserved.
+        </p>
       </div>
     </footer>
   );
