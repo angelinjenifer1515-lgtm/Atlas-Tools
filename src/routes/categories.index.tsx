@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageShell } from "@/components/tools/PageShell";
+import { CategoryIcon } from "@/components/atlas/CategoryIcon";
 import { CATEGORIES, toolsInCategory } from "@/lib/tools/registry";
 
 export const Route = createFileRoute("/categories/")({
@@ -45,10 +46,13 @@ function CategoriesIndex() {
                 className="pointer-events-none absolute -top-10 right-0 h-32 w-32 rounded-full blur-2xl"
                 style={{ background: `radial-gradient(closest-side, ${cat.glow}, transparent 70%)`, opacity: 0.55 }}
               />
-              <span className="font-mono text-[10px] uppercase tracking-widest text-white/45">
-                {toolsInCategory(cat.slug).length} tools
-              </span>
-              <h2 className="font-display mt-4 text-[18px] font-semibold tracking-tight text-white">{cat.name}</h2>
+              <div className="relative flex items-start justify-between gap-4">
+                <CategoryIcon slug={cat.slug} size={44} />
+                <span className="font-mono text-[10px] uppercase tracking-widest text-white/45">
+                  {toolsInCategory(cat.slug).length} tools
+                </span>
+              </div>
+              <h2 className="font-display mt-5 text-[18px] font-semibold tracking-tight text-white">{cat.name}</h2>
               <p className="mt-1 text-[12.5px] leading-relaxed text-white/55">{cat.desc}</p>
             </Link>
           ))}

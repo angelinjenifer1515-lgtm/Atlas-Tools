@@ -1,21 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import { Link } from "@tanstack/react-router";
-import type { CategorySlug } from "@/lib/tools/registry";
-import catAi from "@/assets/cat-ai.jpg";
-import catPdf from "@/assets/cat-pdf.jpg";
-import catImage from "@/assets/cat-image.jpg";
-import catDev from "@/assets/cat-dev.jpg";
-import catConvert from "@/assets/cat-convert.jpg";
-
-type Cat = { title: string; count: string; desc: string; image: string; glow: string; slug: CategorySlug };
-
-const CATS: Cat[] = [
-  { title: "AI Tools",         count: "12 tools", desc: "Smart utilities for modern problems",   image: catAi,      glow: "rgba(167,139,250,0.35)", slug: "ai-tools" },
-  { title: "PDF Tools",        count: "18 tools", desc: "All the tools you need for PDF files",  image: catPdf,     glow: "rgba(255,120,80,0.30)", slug: "pdf-tools" },
-  { title: "Image Tools",      count: "24 tools", desc: "Edit, convert, optimize beautifully",   image: catImage,   glow: "rgba(90,220,150,0.28)", slug: "image-tools" },
-  { title: "Developer Tools",  count: "15 tools", desc: "Built for speed and precision",         image: catDev,     glow: "rgba(90,150,255,0.30)", slug: "developer-tools" },
-  { title: "Converters",       count: "22 tools", desc: "Convert anything to everything",        image: catConvert, glow: "rgba(220,180,90,0.28)", slug: "text-tools" },
-];
+import { CategoryIcon } from "./CategoryIcon";
+import { CATEGORIES, toolsInCategory, type CategorySlug } from "@/lib/tools/registry";
 
 export function Categories() {
   return (
@@ -36,8 +22,15 @@ export function Categories() {
         </div>
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
-          {CATS.map((c) => (
-            <CategoryCard key={c.title} {...c} />
+          {CATEGORIES.slice(0, 5).map((c) => (
+            <CategoryCard
+              key={c.slug}
+              slug={c.slug}
+              title={c.name}
+              desc={c.desc}
+              count={`${toolsInCategory(c.slug).length} tools`}
+              glow={c.glow}
+            />
           ))}
         </div>
 
@@ -55,7 +48,19 @@ export function Categories() {
   );
 }
 
-function CategoryCard({ title, count, desc, image, glow, slug }: Cat) {
+function CategoryCard({
+  title,
+  count,
+  desc,
+  glow,
+  slug,
+}: {
+  title: string;
+  count: string;
+  desc: string;
+  glow: string;
+  slug: CategorySlug;
+}) {
   return (
     <Link
       to="/categories/$categorySlug"
@@ -72,21 +77,13 @@ function CategoryCard({ title, count, desc, image, glow, slug }: Cat) {
         </span>
       </div>
 
-      {/* 3D icon */}
+      {/* luminous glyph */}
       <div className="relative flex flex-1 items-center justify-center">
         <div
           className="pointer-events-none absolute inset-x-4 top-1/2 h-32 -translate-y-1/2 rounded-full blur-2xl transition-opacity duration-500 group-hover:opacity-100"
           style={{ background: `radial-gradient(closest-side, ${glow}, transparent 70%)`, opacity: 0.55 }}
         />
-        <img
-          src={image}
-          alt=""
-          width={512}
-          height={512}
-          loading="lazy"
-          className="relative h-[160px] w-[160px] select-none object-contain transition-transform duration-700 group-hover:scale-[1.06]"
-          style={{ filter: "drop-shadow(0 20px 40px rgba(0,0,0,0.6))" }}
-        />
+        <CategoryIcon slug={slug} size={76} />
       </div>
 
       <div className="relative">

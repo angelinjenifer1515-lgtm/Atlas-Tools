@@ -279,32 +279,6 @@ function PdfViewer() {
   );
 }
 
-function SimulatedPdf({ label, note }: { label: string; note: string }) {
-  const s = usePdfFiles();
-  const [done, setDone] = useState(false);
-  return (
-    <PdfShell
-      hint="Drop a PDF"
-      files={s.files}
-      setFiles={(f) => {
-        s.setFiles(f);
-        setDone(false);
-      }}
-      busy={s.busy}
-      note={note}
-      action={
-        <Btn
-          variant="primary"
-          disabled={!s.files.length || s.busy}
-          onClick={() => s.run(async () => { await new Promise((r) => setTimeout(r, 1200)); setDone(true); })}
-        >
-          {done ? "Done ✓" : label}
-        </Btn>
-      }
-    />
-  );
-}
-
 function SignPdf() {
   const s = usePdfFiles();
   const [name, setName] = useState("Ada Lovelace");
@@ -374,15 +348,9 @@ export const tools: Record<string, ToolComponent> = {
   "compress-pdf": CompressPdf,
   "rotate-pdf": RotatePdf,
   "delete-pages": DeletePages,
-  "extract-images": () => <SimulatedPdf label="Extract images" note="Image extraction needs a full PDF rasterizer; this is the finished interface." />,
-  "extract-text": () => <SimulatedPdf label="Extract text" note="Text layer extraction needs a PDF parsing worker; this is the finished interface." />,
   "jpg-to-pdf": JpgToPdf,
-  "pdf-to-jpg": () => <SimulatedPdf label="Convert to JPG" note="Page rasterization needs a renderer worker; this is the finished interface." />,
-  "word-to-pdf": () => <SimulatedPdf label="Convert to PDF" note="DOCX conversion requires a document engine; this is the finished interface." />,
   "pdf-viewer": PdfViewer,
   "sign-pdf": SignPdf,
-  "protect-pdf": () => <SimulatedPdf label="Protect PDF" note="Encryption must happen outside the browser for real security; this is the finished interface." />,
-  "unlock-pdf": () => <SimulatedPdf label="Unlock PDF" note="Password removal requires a server-side decryption pass; this is the finished interface." />,
 };
 
 export { Grid };
