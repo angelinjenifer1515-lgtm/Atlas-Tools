@@ -114,22 +114,6 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <svg width="0" height="0" aria-hidden="true" focusable="false" className="absolute">
-        <defs>
-          <linearGradient
-            id="atlas-icon-gradient"
-            gradientUnits="userSpaceOnUse"
-            x1="0"
-            y1="0"
-            x2="24"
-            y2="24"
-          >
-            <stop offset="0%" stopColor="#B9AFFF" />
-            <stop offset="50%" stopColor="#8E7BFF" />
-            <stop offset="100%" stopColor="#4F8CFF" />
-          </linearGradient>
-        </defs>
-      </svg>
       <Outlet />
     </QueryClientProvider>
   );
