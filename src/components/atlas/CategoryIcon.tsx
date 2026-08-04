@@ -34,9 +34,8 @@ export function CategoryIcon({
       <span className="glow-icon__bloom" />
       <Icon
         className="glow-icon__glyph relative"
-        size={size}
-        strokeWidth={1.25}
-        absoluteStrokeWidth
+        size={Math.round(size * 0.82)}
+        strokeWidth={1.5}
       />
     </span>
   );
