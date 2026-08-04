@@ -566,9 +566,6 @@ export const tools: Record<string, ToolComponent> = {
   "image-compressor": Compressor,
   "image-resizer": Resizer,
   "image-cropper": Cropper,
-  "background-remover": () => (
-    <SimulatedImageTool label="Remove background" note="True background removal needs a segmentation model on a server, so this page is the finished interface with a simulated pass." />
-  ),
   "image-converter": () => <Converter />,
   "jpg-to-png": () => <Converter fixed="image/png" />,
   "webp-converter": () => <Converter fixed="image/webp" />,
@@ -577,12 +574,6 @@ export const tools: Record<string, ToolComponent> = {
       <Converter fixed="image/png" />
       <Note>Upload an .svg file to rasterize it into a high-quality PNG.</Note>
     </>
-  ),
-  "gif-maker": () => (
-    <SimulatedImageTool label="Build GIF" note="Frame encoding requires a GIF encoder worker; this page previews the full interface." />
-  ),
-  "image-upscaler": () => (
-    <SimulatedImageTool label="Upscale 2×" note="AI upscaling runs on a model server — this is the finished frontend with a simulated pass." />
   ),
   "image-blur": () => <Filter label="Blur" css={(v) => `blur(${v}px)`} min={0} max={40} unit="px" def={6} />,
   "image-sharpen": () => <Filter label="Sharpen" css={(v) => `contrast(${100 + v}%) saturate(${100 + v / 2}%)`} min={0} max={100} unit="%" def={30} />,
