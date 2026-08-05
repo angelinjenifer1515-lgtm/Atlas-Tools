@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as TermsRouteImport } from './routes/terms'
 import { Route as CategoriesIndexRouteImport } from './routes/categories.index'
 import { Route as CategoriesCategorySlugRouteImport } from './routes/categories.$categorySlug'
 import { Route as ToolsIndexRouteImport } from './routes/tools.index'
@@ -24,6 +25,11 @@ const IndexRoute = IndexRouteImport.update({
 const PrivacyRoute = PrivacyRouteImport.update({
   id: '/privacy',
   path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CategoriesIndexRoute = CategoriesIndexRouteImport.update({
@@ -50,6 +56,7 @@ const ToolsToolSlugRoute = ToolsToolSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/privacy': typeof PrivacyRoute
+  '/terms': typeof TermsRoute
   '/categories/$categorySlug': typeof CategoriesCategorySlugRoute
   '/tools/$toolSlug': typeof ToolsToolSlugRoute
   '/categories/': typeof CategoriesIndexRoute
@@ -58,6 +65,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/privacy': typeof PrivacyRoute
+  '/terms': typeof TermsRoute
   '/categories/$categorySlug': typeof CategoriesCategorySlugRoute
   '/tools/$toolSlug': typeof ToolsToolSlugRoute
   '/categories': typeof CategoriesIndexRoute
@@ -67,6 +75,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/privacy': typeof PrivacyRoute
+  '/terms': typeof TermsRoute
   '/categories/$categorySlug': typeof CategoriesCategorySlugRoute
   '/tools/$toolSlug': typeof ToolsToolSlugRoute
   '/categories/': typeof CategoriesIndexRoute
@@ -77,6 +86,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/privacy'
+    | '/terms'
     | '/categories/$categorySlug'
     | '/tools/$toolSlug'
     | '/categories/'
@@ -85,6 +95,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/privacy'
+    | '/terms'
     | '/categories/$categorySlug'
     | '/tools/$toolSlug'
     | '/categories'
@@ -93,6 +104,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/privacy'
+    | '/terms'
     | '/categories/$categorySlug'
     | '/tools/$toolSlug'
     | '/categories/'
@@ -102,6 +114,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   PrivacyRoute: typeof PrivacyRoute
+  TermsRoute: typeof TermsRoute
   CategoriesCategorySlugRoute: typeof CategoriesCategorySlugRoute
   ToolsToolSlugRoute: typeof ToolsToolSlugRoute
   CategoriesIndexRoute: typeof CategoriesIndexRoute
@@ -122,6 +135,13 @@ declare module '@tanstack/react-router' {
       path: '/privacy'
       fullPath: '/privacy'
       preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/categories/': {
@@ -158,6 +178,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   PrivacyRoute: PrivacyRoute,
+  TermsRoute: TermsRoute,
   CategoriesCategorySlugRoute: CategoriesCategorySlugRoute,
   ToolsToolSlugRoute: ToolsToolSlugRoute,
   CategoriesIndexRoute: CategoriesIndexRoute,
