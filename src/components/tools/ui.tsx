@@ -1,5 +1,14 @@
-import { useCallback, useRef, useState, type ReactNode } from "react";
+import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 import { Check, Copy, Download, RotateCcw, UploadCloud } from "lucide-react";
+
+/* ---------------------------------- hooks ---------------------------------- */
+
+/** True only after hydration — use to gate random/time-dependent output. */
+export function useMounted() {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  return mounted;
+}
 
 /* ---------------------------------- panels --------------------------------- */
 
