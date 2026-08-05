@@ -403,6 +403,7 @@ function JsonValidator() {
 /* ------------------------------- generators --------------------------------- */
 
 function PasswordGenerator() {
+  const mounted = useMounted();
   const [len, setLen] = useState(20);
   const [upper, setUpper] = useState(true);
   const [nums, setNums] = useState(true);
