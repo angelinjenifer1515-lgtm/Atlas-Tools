@@ -1,13 +1,11 @@
 import type { ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
-import { ChevronRight, Sparkles } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import { PageShell } from "./PageShell";
+import { FaqAccordion, type Faq } from "./FaqAccordion";
 import { CATEGORY_BY_SLUG, relatedTools, type ToolMeta } from "@/lib/tools/registry";
 
-export interface Faq {
-  q: string;
-  a: string;
-}
+export type { Faq };
 
 export function ToolShell({
   tool,
@@ -47,12 +45,6 @@ export function ToolShell({
             {tool.name}
           </h1>
           <p className="mt-4 max-w-xl text-[14.5px] leading-relaxed text-white/55">{tool.desc}</p>
-          {tool.simulated ? (
-            <span className="glass mt-6 inline-flex items-center gap-2 rounded-full px-3 py-1 text-[11px] tracking-wide text-white/70">
-              <Sparkles className="h-3 w-3 text-[color:var(--violet-soft)]" />
-              Interface preview — runs entirely in your browser with sample output
-            </span>
-          ) : null}
         </header>
 
         {/* Interactive tool */}
@@ -81,17 +73,7 @@ export function ToolShell({
           <h2 className="font-display mb-5 text-[18px] font-semibold tracking-tight text-white">
             Frequently asked questions
           </h2>
-          <div className="space-y-2.5">
-            {questions.map((f) => (
-              <details key={f.q} className="card-elev group rounded-2xl px-5 py-4 [&_summary]:list-none">
-                <summary className="flex cursor-pointer items-center justify-between gap-4 text-[13.5px] font-medium text-white/85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--violet)]/40">
-                  {f.q}
-                  <ChevronRight className="h-4 w-4 shrink-0 text-white/40 transition-transform group-open:rotate-90" />
-                </summary>
-                <p className="mt-3 text-[13px] leading-relaxed text-white/55">{f.a}</p>
-              </details>
-            ))}
-          </div>
+          <FaqAccordion items={questions} />
         </section>
       </div>
     </PageShell>
@@ -106,9 +88,7 @@ function defaultFaqs(tool: ToolMeta): Faq[] {
     },
     {
       q: "Are my files uploaded to a server?",
-      a: tool.simulated
-        ? "No. Atlas is entirely client-side. This particular tool is an interface preview, so it produces sample output locally instead of calling any service."
-        : "No. Everything is processed locally in your browser, so your files and text never leave your device.",
+      a: "No. Everything is processed locally in your browser, so your files and text never leave your device.",
     },
     {
       q: "Does it work on mobile?",
