@@ -15,7 +15,9 @@ import {
   TextInput,
   Toggle,
   Toolbar,
-  UploadArea,, useMounted } from "../ui";
+  UploadArea,
+  useMounted,
+} from "../ui";
 import type { ToolComponent } from "@/lib/tools/loader";
 
 /* --------------------------- generic transform tool ------------------------- */
