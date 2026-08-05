@@ -16,6 +16,7 @@ import {
   Toggle,
   Toolbar,
   UploadArea,
+  useMounted,
 } from "../ui";
 import type { ToolComponent } from "@/lib/tools/loader";
 
@@ -402,6 +403,7 @@ function JsonValidator() {
 /* ------------------------------- generators --------------------------------- */
 
 function PasswordGenerator() {
+  const mounted = useMounted();
   const [len, setLen] = useState(20);
   const [upper, setUpper] = useState(true);
   const [nums, setNums] = useState(true);
@@ -432,8 +434,8 @@ function PasswordGenerator() {
         </div>
       </Panel>
       <Panel title="Your password">
-        <div className="break-all rounded-xl border border-white/[0.07] bg-black/30 p-4 font-mono text-[15px] text-white">
-          {pwd}
+        <div className="break-all rounded-xl border border-white/[0.07] bg-black/30 p-4 font-mono text-[15px] text-white" aria-live="polite">
+          {mounted ? pwd : "—"}
         </div>
         <div className="mt-3 h-1.5 w-full overflow-hidden rounded-full bg-white/10">
           <div
@@ -445,7 +447,7 @@ function PasswordGenerator() {
           <Btn onClick={() => setSeed((s) => s + 1)} variant="primary">
             Regenerate
           </Btn>
-          <CopyButton value={pwd} />
+          <CopyButton value={mounted ? pwd : ""} />
         </Toolbar>
       </Panel>
     </>
@@ -453,6 +455,7 @@ function PasswordGenerator() {
 }
 
 function UuidGenerator() {
+  const mounted = useMounted();
   const [count, setCount] = useState(5);
   const [seed, setSeed] = useState(0);
   const ids = useMemo(() => {
@@ -465,7 +468,7 @@ function UuidGenerator() {
         <Range label="How many" min={1} max={100} value={count} onChange={(e) => setCount(+e.target.value)} />
       </Panel>
       <Panel title="UUID v4">
-        <Output value={ids} />
+        <Output value={mounted ? ids : "—"} />
         <Toolbar>
           <Btn variant="primary" onClick={() => setSeed((s) => s + 1)}>
             Regenerate

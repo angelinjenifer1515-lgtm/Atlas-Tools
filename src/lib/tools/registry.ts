@@ -127,7 +127,7 @@ export const TOOLS: ToolMeta[] = [
     ["blog-title-generator", "Blog Title Generator", "Headline ideas that get clicks."],
     ["prompt-generator", "Prompt Generator", "Build structured AI prompts."],
     ["product-description-generator", "Product Description Generator", "Store-ready product copy."],
-    ["translator", "Translator", "Translate between languages."],
+    
   ]),
   ...t("developer-tools", [
     ["color-converter", "Color Converter", "HEX, RGB and HSL in sync."],

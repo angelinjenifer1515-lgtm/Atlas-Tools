@@ -287,9 +287,10 @@ function JwtDecoder() {
 }
 
 function TimestampConverter() {
-  const [ts, setTs] = useState(() => String(Math.floor(Date.now() / 1000)));
+  const [ts, setTs] = useState("");
+  useEffect(() => setTs(String(Math.floor(Date.now() / 1000))), []);
   const d = new Date(Number(ts) * (ts.length > 11 ? 1 : 1000));
-  const out = Number.isNaN(+d) ? "—" : `ISO       ${d.toISOString()}\nLocal     ${d.toLocaleString()}\nUTC       ${d.toUTCString()}\nRelative  ${Math.round((+d - Date.now()) / 86400000)} days`;
+  const out = !ts || Number.isNaN(+d) ? "—" : `ISO       ${d.toISOString()}\nLocal     ${d.toLocaleString()}\nUTC       ${d.toUTCString()}\nRelative  ${Math.round((+d - Date.now()) / 86400000)} days`;
   return (
     <Grid>
       <Panel title="Unix timestamp">
@@ -305,9 +306,10 @@ function TimestampConverter() {
 }
 
 function UnixTimeConverter() {
-  const [date, setDate] = useState(() => new Date().toISOString().slice(0, 16));
+  const [date, setDate] = useState("");
+  useEffect(() => setDate(new Date().toISOString().slice(0, 16)), []);
   const d = new Date(date);
-  const out = Number.isNaN(+d) ? "—" : `Seconds       ${Math.floor(+d / 1000)}\nMilliseconds  ${+d}`;
+  const out = !ts || Number.isNaN(+d) ? "—" : `Seconds       ${Math.floor(+d / 1000)}\nMilliseconds  ${+d}`;
   return (
     <Grid>
       <Panel title="Date & time">
