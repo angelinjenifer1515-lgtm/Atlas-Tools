@@ -139,22 +139,41 @@ function DocTool({
             <TextInput type="date" value={date} onChange={(e) => setDate(e.target.value)} />
           </Field>
           <Field label="From">
-            <TextArea className="min-h-[110px] font-sans" value={from} onChange={(e) => setFrom(e.target.value)} />
+            <TextArea
+              className="min-h-[110px] font-sans"
+              value={from}
+              onChange={(e) => setFrom(e.target.value)}
+            />
           </Field>
           <Field label={partyLabel}>
-            <TextArea className="min-h-[110px] font-sans" value={to} onChange={(e) => setTo(e.target.value)} />
+            <TextArea
+              className="min-h-[110px] font-sans"
+              value={to}
+              onChange={(e) => setTo(e.target.value)}
+            />
           </Field>
           <Field label="Currency symbol">
             <TextInput value={cur} onChange={(e) => setCur(e.target.value)} />
           </Field>
-          <Range label="Tax rate" min={0} max={30} value={taxRate} suffix="%" onChange={(e) => setTaxRate(+e.target.value)} />
+          <Range
+            label="Tax rate"
+            min={0}
+            max={30}
+            value={taxRate}
+            suffix="%"
+            onChange={(e) => setTaxRate(+e.target.value)}
+          />
         </div>
       </Panel>
 
       <Panel title="Line items">
         <LineItems lines={lines} setLines={setLines} />
         <Field label="Notes" className="mt-4">
-          <TextArea className="min-h-[90px] font-sans" value={notes} onChange={(e) => setNotes(e.target.value)} />
+          <TextArea
+            className="min-h-[90px] font-sans"
+            value={notes}
+            onChange={(e) => setNotes(e.target.value)}
+          />
         </Field>
       </Panel>
 
@@ -165,7 +184,10 @@ function DocTool({
           <Stat label="Total" value={money(total, cur)} />
         </div>
         <div className="mt-4 overflow-hidden rounded-xl border border-white/[0.07] bg-white">
-          <div className="max-h-[520px] overflow-auto p-6 text-black" dangerouslySetInnerHTML={{ __html: html }} />
+          <div
+            className="max-h-[520px] overflow-auto p-6 text-black"
+            dangerouslySetInnerHTML={{ __html: html }}
+          />
         </div>
         <Toolbar>
           <Btn variant="primary" onClick={() => printHtml(`${heading} ${ref}`, html)}>
@@ -223,22 +245,41 @@ function ResumeBuilder() {
             <TextInput value={contact} onChange={(e) => setContact(e.target.value)} />
           </Field>
           <Field label="Summary" className="sm:col-span-2">
-            <TextArea className="min-h-[90px] font-sans" value={summary} onChange={(e) => setSummary(e.target.value)} />
+            <TextArea
+              className="min-h-[90px] font-sans"
+              value={summary}
+              onChange={(e) => setSummary(e.target.value)}
+            />
           </Field>
           <Field label="Experience" className="sm:col-span-2">
-            <TextArea className="min-h-[160px] font-sans" value={experience} onChange={(e) => setExperience(e.target.value)} />
+            <TextArea
+              className="min-h-[160px] font-sans"
+              value={experience}
+              onChange={(e) => setExperience(e.target.value)}
+            />
           </Field>
           <Field label="Skills">
-            <TextArea className="min-h-[80px] font-sans" value={skills} onChange={(e) => setSkills(e.target.value)} />
+            <TextArea
+              className="min-h-[80px] font-sans"
+              value={skills}
+              onChange={(e) => setSkills(e.target.value)}
+            />
           </Field>
           <Field label="Education">
-            <TextArea className="min-h-[80px] font-sans" value={education} onChange={(e) => setEducation(e.target.value)} />
+            <TextArea
+              className="min-h-[80px] font-sans"
+              value={education}
+              onChange={(e) => setEducation(e.target.value)}
+            />
           </Field>
         </div>
       </Panel>
       <Panel title="Preview">
         <div className="overflow-hidden rounded-xl border border-white/[0.07] bg-white">
-          <div className="max-h-[560px] overflow-auto p-6 text-black" dangerouslySetInnerHTML={{ __html: html }} />
+          <div
+            className="max-h-[560px] overflow-auto p-6 text-black"
+            dangerouslySetInnerHTML={{ __html: html }}
+          />
         </div>
         <Toolbar>
           <Btn variant="primary" onClick={() => printHtml(`${name} — Resume`, html)}>
@@ -246,7 +287,10 @@ function ResumeBuilder() {
           </Btn>
           <Btn
             onClick={() =>
-              downloadBlob(new Blob([`<!doctype html><meta charset="utf-8">${html}`], { type: "text/html" }), "resume.html")
+              downloadBlob(
+                new Blob([`<!doctype html><meta charset="utf-8">${html}`], { type: "text/html" }),
+                "resume.html",
+              )
             }
           >
             Download HTML
@@ -312,7 +356,12 @@ function BusinessCardMaker() {
             <TextInput value={details} onChange={(e) => setDetails(e.target.value)} />
           </Field>
           <Field label="Accent colour">
-            <TextInput type="color" value={accent} onChange={(e) => setAccent(e.target.value)} className="h-11 p-1" />
+            <TextInput
+              type="color"
+              value={accent}
+              onChange={(e) => setAccent(e.target.value)}
+              className="h-11 p-1"
+            />
           </Field>
         </div>
       </Panel>
@@ -321,7 +370,9 @@ function BusinessCardMaker() {
         <Toolbar>
           <Btn
             variant="primary"
-            onClick={() => ref.current?.toBlob((b) => b && downloadBlob(b, "business-card.png"), "image/png")}
+            onClick={() =>
+              ref.current?.toBlob((b) => b && downloadBlob(b, "business-card.png"), "image/png")
+            }
           >
             Download PNG
           </Btn>
@@ -360,7 +411,10 @@ function BarcodeGenerator() {
   const download = () => {
     const el = svgRef.current;
     if (!el) return;
-    downloadBlob(new Blob([new XMLSerializer().serializeToString(el)], { type: "image/svg+xml" }), "barcode.svg");
+    downloadBlob(
+      new Blob([new XMLSerializer().serializeToString(el)], { type: "image/svg+xml" }),
+      "barcode.svg",
+    );
   };
 
   return (
@@ -408,7 +462,11 @@ function QrGenerator() {
 
   useEffect(() => {
     let alive = true;
-    QRCode.toDataURL(text || " ", { width: size, margin: 1, color: { dark: "#000000", light: "#ffffff" } })
+    QRCode.toDataURL(text || " ", {
+      width: size,
+      margin: 1,
+      color: { dark: "#000000", light: "#ffffff" },
+    })
       .then((d) => alive && setUrl(d))
       .catch(() => alive && setUrl(""));
     return () => {
@@ -420,15 +478,29 @@ function QrGenerator() {
     <>
       <Panel title="Content">
         <Field label="Text or URL">
-          <TextArea className="min-h-[100px]" value={text} onChange={(e) => setText(e.target.value)} />
+          <TextArea
+            className="min-h-[100px]"
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+          />
         </Field>
         <div className="mt-4">
-          <Range label="Size" min={160} max={720} step={20} value={size} suffix="px" onChange={(e) => setSize(+e.target.value)} />
+          <Range
+            label="Size"
+            min={160}
+            max={720}
+            step={20}
+            value={size}
+            suffix="px"
+            onChange={(e) => setSize(+e.target.value)}
+          />
         </div>
       </Panel>
       <Panel title="Result">
         <div className="flex min-h-[220px] items-center justify-center rounded-xl bg-white p-4">
-          {url ? <img src={url} alt="QR code" className="max-w-full" width={size} height={size} /> : null}
+          {url ? (
+            <img src={url} alt="QR code" className="max-w-full" width={size} height={size} />
+          ) : null}
         </div>
         <Toolbar>
           <Btn
@@ -468,10 +540,18 @@ function ProfitCalculator() {
             <TextInput inputMode="decimal" value={cost} onChange={(e) => setCost(e.target.value)} />
           </Field>
           <Field label="Selling price">
-            <TextInput inputMode="decimal" value={price} onChange={(e) => setPrice(e.target.value)} />
+            <TextInput
+              inputMode="decimal"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+            />
           </Field>
           <Field label="Units sold">
-            <TextInput inputMode="decimal" value={units} onChange={(e) => setUnits(e.target.value)} />
+            <TextInput
+              inputMode="decimal"
+              value={units}
+              onChange={(e) => setUnits(e.target.value)}
+            />
           </Field>
         </div>
       </Panel>
@@ -497,9 +577,20 @@ function TaxCalculator() {
       <Panel title="Inputs">
         <div className="grid gap-4 sm:grid-cols-2">
           <Field label="Gross amount">
-            <TextInput inputMode="decimal" value={amount} onChange={(e) => setAmount(e.target.value)} />
+            <TextInput
+              inputMode="decimal"
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
+            />
           </Field>
-          <Range label="Tax rate" min={0} max={60} value={rate} suffix="%" onChange={(e) => setRate(+e.target.value)} />
+          <Range
+            label="Tax rate"
+            min={0}
+            max={60}
+            value={rate}
+            suffix="%"
+            onChange={(e) => setRate(+e.target.value)}
+          />
         </div>
       </Panel>
       <Panel title="Result">
@@ -532,7 +623,11 @@ function GstCalculator() {
       <Panel title="Inputs">
         <div className="grid gap-4 sm:grid-cols-3">
           <Field label="Amount">
-            <TextInput inputMode="decimal" value={amount} onChange={(e) => setAmount(e.target.value)} />
+            <TextInput
+              inputMode="decimal"
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
+            />
           </Field>
           <Field label="GST rate %">
             <TextInput inputMode="decimal" value={rate} onChange={(e) => setRate(e.target.value)} />
@@ -555,7 +650,9 @@ function GstCalculator() {
           <Stat label="GST" value={gst.toFixed(2)} />
           <Stat label="Total" value={total.toFixed(2)} />
         </div>
-        <Output value={`Base: ${base.toFixed(2)}\nGST (${r}%): ${gst.toFixed(2)}\nTotal: ${total.toFixed(2)}`} />
+        <Output
+          value={`Base: ${base.toFixed(2)}\nGST (${r}%): ${gst.toFixed(2)}\nTotal: ${total.toFixed(2)}`}
+        />
       </Panel>
     </>
   );

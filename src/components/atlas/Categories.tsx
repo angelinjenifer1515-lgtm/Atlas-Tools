@@ -12,12 +12,13 @@ export function Categories() {
             Browse by Category
           </span>
           <h2 className="font-display max-w-3xl text-balance text-[clamp(2rem,4.5vw,3.6rem)] font-semibold leading-[1.02] tracking-[-0.035em] text-white">
-            Every tool you need,<br />
+            Every tool you need,
+            <br />
             in one <span className="text-gradient-violet-inline">intelligent</span> place.
           </h2>
           <p className="mt-5 max-w-xl text-[14px] leading-relaxed text-white/55">
-            From everyday essentials to advanced utilities, everything is designed
-            to save you time and help you focus on what matters.
+            From everyday essentials to advanced utilities, everything is designed to save you time
+            and help you focus on what matters.
           </p>
         </div>
 
@@ -81,7 +82,10 @@ function CategoryCard({
       <div className="relative flex flex-1 items-center justify-center">
         <div
           className="pointer-events-none absolute inset-x-4 top-1/2 h-32 -translate-y-1/2 rounded-full blur-2xl transition-opacity duration-500 group-hover:opacity-100"
-          style={{ background: `radial-gradient(closest-side, ${glow}, transparent 70%)`, opacity: 0.55 }}
+          style={{
+            background: `radial-gradient(closest-side, ${glow}, transparent 70%)`,
+            opacity: 0.55,
+          }}
         />
         <CategoryIcon slug={slug} size={76} />
       </div>

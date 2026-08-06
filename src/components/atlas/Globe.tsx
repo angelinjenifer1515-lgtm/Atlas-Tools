@@ -15,7 +15,12 @@ export function Globe() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    let w = 0, h = 0, dpr = 1, cx = 0, cy = 0, R = 0;
+    let w = 0,
+      h = 0,
+      dpr = 1,
+      cx = 0,
+      cy = 0,
+      R = 0;
     let raf = 0;
     let yaw = 0;
     const N = 1100;
@@ -64,7 +69,11 @@ export function Globe() {
       const ring: P[] = [];
       for (let i = 0; i <= 96; i++) {
         const t = (i / 96) * Math.PI - Math.PI / 2;
-        ring.push({ x: Math.cos(t) * Math.cos(ang), y: Math.sin(t), z: Math.cos(t) * Math.sin(ang) });
+        ring.push({
+          x: Math.cos(t) * Math.cos(ang),
+          y: Math.sin(t),
+          z: Math.cos(t) * Math.sin(ang),
+        });
       }
       lonRings.push(ring);
     }
@@ -72,7 +81,8 @@ export function Globe() {
     for (let l = 1; l < 9; l++) {
       const phi = (l / 9) * Math.PI - Math.PI / 2;
       const ring: P[] = [];
-      const r = Math.cos(phi), y = Math.sin(phi);
+      const r = Math.cos(phi),
+        y = Math.sin(phi);
       for (let i = 0; i <= 120; i++) {
         const t = (i / 120) * Math.PI * 2;
         ring.push({ x: Math.cos(t) * r, y, z: Math.sin(t) * r });
@@ -91,8 +101,10 @@ export function Globe() {
       yaw += (dt * (2 * Math.PI)) / 100;
       const tilt = -0.35 + pointer.current.y * 0.35;
       const yawOffset = pointer.current.x * 0.55;
-      const cosY = Math.cos(yaw + yawOffset), sinY = Math.sin(yaw + yawOffset);
-      const cosX = Math.cos(tilt), sinX = Math.sin(tilt);
+      const cosY = Math.cos(yaw + yawOffset),
+        sinY = Math.sin(yaw + yawOffset);
+      const cosX = Math.cos(tilt),
+        sinX = Math.sin(tilt);
 
       ctx.clearRect(0, 0, w, h);
 
@@ -102,10 +114,19 @@ export function Globe() {
       halo.addColorStop(0.5, "rgba(124,92,240,0.04)");
       halo.addColorStop(1, "rgba(0,0,0,0)");
       ctx.fillStyle = halo;
-      ctx.beginPath(); ctx.arc(cx, cy, R * 1.5, 0, Math.PI * 2); ctx.fill();
+      ctx.beginPath();
+      ctx.arc(cx, cy, R * 1.5, 0, Math.PI * 2);
+      ctx.fill();
 
       // top-right bright bloom
-      const bloom = ctx.createRadialGradient(cx + R * 0.7, cy - R * 0.55, 0, cx + R * 0.7, cy - R * 0.55, R * 0.9);
+      const bloom = ctx.createRadialGradient(
+        cx + R * 0.7,
+        cy - R * 0.55,
+        0,
+        cx + R * 0.7,
+        cy - R * 0.55,
+        R * 0.9,
+      );
       bloom.addColorStop(0, "rgba(255,255,255,0.35)");
       bloom.addColorStop(0.4, "rgba(196,181,253,0.15)");
       bloom.addColorStop(1, "rgba(0,0,0,0)");
@@ -118,12 +139,18 @@ export function Globe() {
         let started = false;
         for (const p of ring) {
           const r = rotate(p, cosY, sinY, cosX, sinX);
-          if (r.z < -0.05) { started = false; continue; }
+          if (r.z < -0.05) {
+            started = false;
+            continue;
+          }
           const px = cx + r.x * R;
           const py = cy + r.y * R;
           const a = Math.max(0, Math.min(1, (r.z + 0.5) * alpha));
           ctx.strokeStyle = `rgba(200,190,255,${a * 0.28})`;
-          if (!started) { ctx.moveTo(px, py); started = true; } else ctx.lineTo(px, py);
+          if (!started) {
+            ctx.moveTo(px, py);
+            started = true;
+          } else ctx.lineTo(px, py);
         }
         ctx.stroke();
       };
@@ -141,9 +168,10 @@ export function Globe() {
         const lit = Math.max(0, r.x * 0.6 - r.y * 0.6);
         const size = 0.4 + front * 1.4 + lit * 0.6;
         const alpha = 0.15 + front * 0.7 + lit * 0.3;
-        ctx.fillStyle = lit > 0.5
-          ? `rgba(255,255,255,${Math.min(1, alpha)})`
-          : `rgba(196,181,253,${Math.min(1, alpha * 0.9)})`;
+        ctx.fillStyle =
+          lit > 0.5
+            ? `rgba(255,255,255,${Math.min(1, alpha)})`
+            : `rgba(196,181,253,${Math.min(1, alpha * 0.9)})`;
         ctx.beginPath();
         ctx.arc(px, py, size, 0, Math.PI * 2);
         ctx.fill();
@@ -176,5 +204,7 @@ export function Globe() {
     };
   }, []);
 
-  return <canvas ref={ref} className="pointer-events-none absolute inset-0 h-full w-full" aria-hidden />;
+  return (
+    <canvas ref={ref} className="pointer-events-none absolute inset-0 h-full w-full" aria-hidden />
+  );
 }

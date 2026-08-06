@@ -1,6 +1,18 @@
 import { useState } from "react";
 import { PDFDocument, degrees } from "pdf-lib";
-import { Btn, Grid, Note, Panel, Range, Select, Field, TextInput, Toolbar, UploadArea, downloadBlob } from "../ui";
+import {
+  Btn,
+  Grid,
+  Note,
+  Panel,
+  Range,
+  Select,
+  Field,
+  TextInput,
+  Toolbar,
+  UploadArea,
+  downloadBlob,
+} from "../ui";
 import type { ToolComponent } from "@/lib/tools/loader";
 
 const pdfBlob = (bytes: Uint8Array) =>
@@ -45,12 +57,22 @@ function PdfShell({
   return (
     <>
       <Panel title="Upload">
-        <UploadArea accept={accept} multiple={multiple} hint={hint} onFiles={(f) => setFiles(multiple ? [...files, ...f] : f.slice(0, 1))} files={files} />
+        <UploadArea
+          accept={accept}
+          multiple={multiple}
+          hint={hint}
+          onFiles={(f) => setFiles(multiple ? [...files, ...f] : f.slice(0, 1))}
+          files={files}
+        />
       </Panel>
       {settings ? <Panel title="Settings">{settings}</Panel> : null}
       <Panel title="Result">
         <p className="text-[13px] text-white/50">
-          {busy ? "Processing your document…" : files.length ? "Ready. Run the tool to get your file." : "Add a document to begin."}
+          {busy
+            ? "Processing your document…"
+            : files.length
+              ? "Ready. Run the tool to get your file."
+              : "Add a document to begin."}
         </p>
         <Toolbar>
           {action}
@@ -168,7 +190,9 @@ function RotatePdf() {
           onClick={() =>
             s.run(async () => {
               const doc = await PDFDocument.load(await s.files[0].arrayBuffer());
-              doc.getPages().forEach((p) => p.setRotation(degrees((p.getRotation().angle + +angle) % 360)));
+              doc
+                .getPages()
+                .forEach((p) => p.setRotation(degrees((p.getRotation().angle + +angle) % 360)));
               downloadBlob(pdfBlob(await doc.save()), "rotated.pdf");
             })
           }
@@ -237,7 +261,8 @@ function JpgToPdf() {
               const doc = await PDFDocument.create();
               for (const f of s.files) {
                 const bytes = await f.arrayBuffer();
-                const img = f.type === "image/png" ? await doc.embedPng(bytes) : await doc.embedJpg(bytes);
+                const img =
+                  f.type === "image/png" ? await doc.embedPng(bytes) : await doc.embedJpg(bytes);
                 const page = doc.addPage([img.width, img.height]);
                 page.drawImage(img, { x: 0, y: 0, width: img.width, height: img.height });
               }
@@ -265,7 +290,11 @@ function PdfViewer() {
       </Panel>
       <Panel title="Viewer">
         {url ? (
-          <iframe title="PDF preview" src={url} className="h-[70vh] w-full rounded-xl border border-white/[0.07] bg-black/30" />
+          <iframe
+            title="PDF preview"
+            src={url}
+            className="h-[70vh] w-full rounded-xl border border-white/[0.07] bg-black/30"
+          />
         ) : (
           <div className="flex h-[300px] items-center justify-center rounded-xl border border-white/[0.07] bg-black/30 text-[13px] text-white/40">
             Your document will appear here
@@ -322,7 +351,16 @@ function CompressPdf() {
       files={s.files}
       setFiles={s.setFiles}
       busy={s.busy}
-      settings={<Range label="Compression" min={10} max={90} value={level} suffix="%" onChange={(e) => setLevel(+e.target.value)} />}
+      settings={
+        <Range
+          label="Compression"
+          min={10}
+          max={90}
+          value={level}
+          suffix="%"
+          onChange={(e) => setLevel(+e.target.value)}
+        />
+      }
       note="Structural optimisation runs locally; deep image recompression needs a server pass."
       action={
         <Btn

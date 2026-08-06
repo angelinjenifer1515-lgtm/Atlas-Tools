@@ -1,6 +1,12 @@
 export function AtlasMark({ className = "h-6 w-6" }: { className?: string }) {
   return (
-    <svg viewBox="0 0 40 40" className={className} fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+    <svg
+      viewBox="0 0 40 40"
+      className={className}
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden
+    >
       <defs>
         <linearGradient id="atlas-violet" x1="0" y1="0" x2="1" y2="1">
           <stop offset="0" stopColor="#c4b5fd" />

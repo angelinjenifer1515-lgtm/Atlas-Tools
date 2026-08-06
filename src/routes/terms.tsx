@@ -6,9 +6,16 @@ export const Route = createFileRoute("/terms")({
   head: () => ({
     meta: [
       { title: "Terms of Use — Atlas Tools" },
-      { name: "description", content: "The simple terms that cover using the free, browser-based utilities on Atlas Tools." },
+      {
+        name: "description",
+        content:
+          "The simple terms that cover using the free, browser-based utilities on Atlas Tools.",
+      },
       { property: "og:title", content: "Terms of Use — Atlas Tools" },
-      { property: "og:description", content: "Free, unlimited, client-side tools — provided as-is, with no warranty." },
+      {
+        property: "og:description",
+        content: "Free, unlimited, client-side tools — provided as-is, with no warranty.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],

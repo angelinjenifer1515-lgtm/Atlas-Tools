@@ -28,7 +28,11 @@ export const Route = createFileRoute("/")({
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Atlas Tools" },
-      { name: "twitter:description", content: "Hundreds of beautifully crafted online utilities. Completely free, no sign-ups, no downloads, everything runs instantly in your browser. New possibilities, continuously added." },
+      {
+        name: "twitter:description",
+        content:
+          "Hundreds of beautifully crafted online utilities. Completely free, no sign-ups, no downloads, everything runs instantly in your browser. New possibilities, continuously added.",
+      },
     ],
   }),
   component: Index,

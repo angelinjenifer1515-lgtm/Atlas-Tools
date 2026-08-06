@@ -2,10 +2,10 @@ import { GraduationCap, Palette, Code2, Briefcase } from "lucide-react";
 import ring from "@/assets/ring.jpg";
 
 const AUDIENCES = [
-  { Icon: GraduationCap, title: "Students",   desc: "Study smarter and get things done faster." },
-  { Icon: Palette,       title: "Creators",   desc: "Create, edit and ship your best work." },
-  { Icon: Code2,         title: "Developers", desc: "Code, convert and debug with ease." },
-  { Icon: Briefcase,     title: "Businesses", desc: "Streamline workflows and save hours." },
+  { Icon: GraduationCap, title: "Students", desc: "Study smarter and get things done faster." },
+  { Icon: Palette, title: "Creators", desc: "Create, edit and ship your best work." },
+  { Icon: Code2, title: "Developers", desc: "Code, convert and debug with ease." },
+  { Icon: Briefcase, title: "Businesses", desc: "Streamline workflows and save hours." },
 ];
 
 export function BuiltForImpact() {
@@ -17,7 +17,8 @@ export function BuiltForImpact() {
             Built for Impact
           </div>
           <h2 className="font-display mx-auto max-w-3xl text-balance text-[clamp(2rem,4.5vw,3.6rem)] font-semibold leading-[1.02] tracking-[-0.035em] text-white">
-            Made for real productivity.<br />
+            Made for real productivity.
+            <br />
             Built for <span className="text-gradient-violet-inline">everyone.</span>
           </h2>
         </div>
@@ -71,7 +72,6 @@ export function BuiltForImpact() {
             <div className="pointer-events-none absolute inset-x-0 top-1/2 h-24 -translate-y-1/2 bg-[radial-gradient(closest-side,rgba(124,92,240,0.22),transparent_70%)]" />
           </div>
 
-
           <div className="mt-8 flex flex-col items-center gap-3">
             <div className="flex items-center gap-4">
               <span className="font-display text-[clamp(2.2rem,5vw,3.4rem)] font-semibold tracking-tight text-white">
@@ -101,13 +101,21 @@ function CountUp({ target }: { target: number }) {
   const [n, setN] = useState(0);
   const [start, setStart] = useState(false);
   useEffect(() => {
-    const el = ref.current; if (!el) return;
-    const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) setStart(true); }, { threshold: 0.4 });
-    io.observe(el); return () => io.disconnect();
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) setStart(true);
+      },
+      { threshold: 0.4 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
   }, []);
   useEffect(() => {
     if (!start) return;
-    const dur = 1800; const t0 = performance.now();
+    const dur = 1800;
+    const t0 = performance.now();
     let raf = 0;
     const tick = (t: number) => {
       const p = Math.min(1, (t - t0) / dur);

@@ -13,7 +13,9 @@ export function StarField({ density = 1 }: { density?: number }) {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    let w = 0, h = 0, dpr = 1;
+    let w = 0,
+      h = 0,
+      dpr = 1;
     let raf = 0;
     let stars: { x: number; y: number; z: number; r: number; tw: number; p: number }[] = [];
 
@@ -24,7 +26,7 @@ export function StarField({ density = 1 }: { density?: number }) {
       canvas.width = Math.floor(w * dpr);
       canvas.height = Math.floor(h * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      const count = Math.floor((w * h) / 6000 * density);
+      const count = Math.floor(((w * h) / 6000) * density);
       stars = new Array(count).fill(0).map(() => ({
         x: Math.random() * w,
         y: Math.random() * h,
@@ -45,7 +47,10 @@ export function StarField({ density = 1 }: { density?: number }) {
       for (const s of stars) {
         s.p += dt * s.tw;
         s.y += dt * (6 + s.z * 12);
-        if (s.y > h + 2) { s.y = -2; s.x = Math.random() * w; }
+        if (s.y > h + 2) {
+          s.y = -2;
+          s.x = Math.random() * w;
+        }
         const a = 0.35 + Math.sin(s.p) * 0.35 + s.z * 0.3;
         ctx.globalAlpha = Math.max(0, Math.min(1, a));
         ctx.fillStyle = "#ffffff";
@@ -64,10 +69,6 @@ export function StarField({ density = 1 }: { density?: number }) {
   }, [density]);
 
   return (
-    <canvas
-      ref={ref}
-      className="pointer-events-none absolute inset-0 h-full w-full"
-      aria-hidden
-    />
+    <canvas ref={ref} className="pointer-events-none absolute inset-0 h-full w-full" aria-hidden />
   );
 }

@@ -13,14 +13,19 @@ export const Route = createFileRoute("/tools/$toolSlug")({
   },
   head: ({ loaderData }) => {
     if (!loaderData) {
-      return { meta: [{ title: "Tool not found — Atlas Tools" }, { name: "robots", content: "noindex" }] };
+      return {
+        meta: [{ title: "Tool not found — Atlas Tools" }, { name: "robots", content: "noindex" }],
+      };
     }
     const { tool } = loaderData;
     const title = `${tool.name} — Free Online Tool | Atlas`;
     return {
       meta: [
         { title },
-        { name: "description", content: `${tool.desc} Free, private and instant — runs entirely in your browser.` },
+        {
+          name: "description",
+          content: `${tool.desc} Free, private and instant — runs entirely in your browser.`,
+        },
         { property: "og:title", content: title },
         { property: "og:description", content: tool.desc },
         { property: "og:type", content: "website" },
@@ -40,7 +45,9 @@ function ToolPage() {
     <ToolShell tool={tool}>
       <Suspense
         fallback={
-          <div className="card-elev rounded-2xl p-8 text-[13px] text-white/50">Loading the interface…</div>
+          <div className="card-elev rounded-2xl p-8 text-[13px] text-white/50">
+            Loading the interface…
+          </div>
         }
       >
         <Comp />
@@ -50,18 +57,30 @@ function ToolPage() {
 }
 
 function ToolError() {
-  return <Fallback title="Something went wrong" body="This tool could not be loaded. Try again or browse the rest." />;
+  return (
+    <Fallback
+      title="Something went wrong"
+      body="This tool could not be loaded. Try again or browse the rest."
+    />
+  );
 }
 
 function ToolNotFound() {
-  return <Fallback title="Tool not found" body="We could not find that tool. Browse the full collection instead." />;
+  return (
+    <Fallback
+      title="Tool not found"
+      body="We could not find that tool. Browse the full collection instead."
+    />
+  );
 }
 
 function Fallback({ title, body }: { title: string; body: string }) {
   return (
     <PageShell>
       <div className="mx-auto max-w-3xl px-6 py-24 text-center">
-        <h1 className="font-display text-[clamp(2rem,4.5vw,3rem)] font-semibold tracking-[-0.035em] text-white">{title}</h1>
+        <h1 className="font-display text-[clamp(2rem,4.5vw,3rem)] font-semibold tracking-[-0.035em] text-white">
+          {title}
+        </h1>
         <p className="mt-4 text-[14px] text-white/55">{body}</p>
         <Link
           to="/tools"

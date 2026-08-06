@@ -13,17 +13,34 @@ export function InteractiveBackground() {
       {/* feathered ambient light patches */}
       <div
         className="ambient-glow"
-        style={{ top: "18%", left: "-8%", width: "42vw", height: "42vw", background: "radial-gradient(closest-side, rgba(124,92,255,0.16), transparent 70%)" }}
+        style={{
+          top: "18%",
+          left: "-8%",
+          width: "42vw",
+          height: "42vw",
+          background: "radial-gradient(closest-side, rgba(124,92,255,0.16), transparent 70%)",
+        }}
       />
       <div
         className="ambient-glow"
-        style={{ top: "52%", right: "-10%", width: "46vw", height: "46vw", background: "radial-gradient(closest-side, rgba(79,140,255,0.13), transparent 70%)" }}
+        style={{
+          top: "52%",
+          right: "-10%",
+          width: "46vw",
+          height: "46vw",
+          background: "radial-gradient(closest-side, rgba(79,140,255,0.13), transparent 70%)",
+        }}
       />
       <div
         className="ambient-glow"
-        style={{ bottom: "-12%", left: "28%", width: "50vw", height: "38vw", background: "radial-gradient(closest-side, rgba(26,20,70,0.28), transparent 72%)" }}
+        style={{
+          bottom: "-12%",
+          left: "28%",
+          width: "50vw",
+          height: "38vw",
+          background: "radial-gradient(closest-side, rgba(26,20,70,0.28), transparent 72%)",
+        }}
       />
-
     </div>
   );
 }

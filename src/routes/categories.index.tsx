@@ -13,7 +13,10 @@ export const Route = createFileRoute("/categories/")({
           "Explore Atlas tool categories: image, PDF, text, calculators, AI, developer and business utilities — all free and browser-based.",
       },
       { property: "og:title", content: "Tool Categories — Atlas" },
-      { property: "og:description", content: "Seven categories, over a hundred free browser tools." },
+      {
+        property: "og:description",
+        content: "Seven categories, over a hundred free browser tools.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -44,7 +47,10 @@ function CategoriesIndex() {
             >
               <div
                 className="pointer-events-none absolute -top-10 right-0 h-32 w-32 rounded-full blur-2xl"
-                style={{ background: `radial-gradient(closest-side, ${cat.glow}, transparent 70%)`, opacity: 0.55 }}
+                style={{
+                  background: `radial-gradient(closest-side, ${cat.glow}, transparent 70%)`,
+                  opacity: 0.55,
+                }}
               />
               <div className="relative flex items-start justify-between gap-4">
                 <CategoryIcon slug={cat.slug} size={44} />
@@ -52,7 +58,9 @@ function CategoriesIndex() {
                   {toolsInCategory(cat.slug).length} tools
                 </span>
               </div>
-              <h2 className="font-display mt-5 text-[18px] font-semibold tracking-tight text-white">{cat.name}</h2>
+              <h2 className="font-display mt-5 text-[18px] font-semibold tracking-tight text-white">
+                {cat.name}
+              </h2>
               <p className="mt-1 text-[12.5px] leading-relaxed text-white/55">{cat.desc}</p>
             </Link>
           ))}
