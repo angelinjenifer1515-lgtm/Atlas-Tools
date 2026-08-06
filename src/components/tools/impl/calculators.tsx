@@ -1,5 +1,17 @@
 import { useMemo, useState } from "react";
-import { Btn, CopyButton, Field, Grid, Note, Output, Panel, Select, Stat, TextInput, Toolbar } from "../ui";
+import {
+  Btn,
+  CopyButton,
+  Field,
+  Grid,
+  Note,
+  Output,
+  Panel,
+  Select,
+  Stat,
+  TextInput,
+  Toolbar,
+} from "../ui";
 import type { ToolComponent } from "@/lib/tools/loader";
 
 function Calc({ inputs, result }: { inputs: React.ReactNode; result: React.ReactNode }) {
@@ -12,7 +24,8 @@ function Calc({ inputs, result }: { inputs: React.ReactNode; result: React.React
 }
 
 const num = (v: string) => (v.trim() === "" ? NaN : Number(v));
-const money = (n: number) => (Number.isFinite(n) ? n.toLocaleString(undefined, { maximumFractionDigits: 2 }) : "—");
+const money = (n: number) =>
+  Number.isFinite(n) ? n.toLocaleString(undefined, { maximumFractionDigits: 2 }) : "—";
 
 function AgeCalculator() {
   const [dob, setDob] = useState("1995-06-15");
@@ -23,8 +36,14 @@ function AgeCalculator() {
     let y = now.getFullYear() - d.getFullYear();
     let m = now.getMonth() - d.getMonth();
     let day = now.getDate() - d.getDate();
-    if (day < 0) { m--; day += new Date(now.getFullYear(), now.getMonth(), 0).getDate(); }
-    if (m < 0) { y--; m += 12; }
+    if (day < 0) {
+      m--;
+      day += new Date(now.getFullYear(), now.getMonth(), 0).getDate();
+    }
+    if (m < 0) {
+      y--;
+      m += 12;
+    }
     const days = Math.floor((+now - +d) / 86400000);
     return { y, m, day, days };
   }, [dob]);
@@ -51,13 +70,18 @@ function BmiCalculator() {
   const [kg, setKg] = useState("70");
   const [cm, setCm] = useState("175");
   const bmi = num(kg) / (num(cm) / 100) ** 2;
-  const band = bmi < 18.5 ? "Underweight" : bmi < 25 ? "Healthy" : bmi < 30 ? "Overweight" : "Obese";
+  const band =
+    bmi < 18.5 ? "Underweight" : bmi < 25 ? "Healthy" : bmi < 30 ? "Overweight" : "Obese";
   return (
     <Calc
       inputs={
         <div className="grid gap-4 sm:grid-cols-2">
-          <Field label="Weight (kg)"><TextInput value={kg} inputMode="decimal" onChange={(e) => setKg(e.target.value)} /></Field>
-          <Field label="Height (cm)"><TextInput value={cm} inputMode="decimal" onChange={(e) => setCm(e.target.value)} /></Field>
+          <Field label="Weight (kg)">
+            <TextInput value={kg} inputMode="decimal" onChange={(e) => setKg(e.target.value)} />
+          </Field>
+          <Field label="Height (cm)">
+            <TextInput value={cm} inputMode="decimal" onChange={(e) => setCm(e.target.value)} />
+          </Field>
         </div>
       }
       result={
@@ -77,8 +101,12 @@ function PercentageCalculator() {
     <Calc
       inputs={
         <div className="grid gap-4 sm:grid-cols-2">
-          <Field label="Value A"><TextInput value={a} inputMode="decimal" onChange={(e) => setA(e.target.value)} /></Field>
-          <Field label="Value B"><TextInput value={b} inputMode="decimal" onChange={(e) => setB(e.target.value)} /></Field>
+          <Field label="Value A">
+            <TextInput value={a} inputMode="decimal" onChange={(e) => setA(e.target.value)} />
+          </Field>
+          <Field label="Value B">
+            <TextInput value={b} inputMode="decimal" onChange={(e) => setB(e.target.value)} />
+          </Field>
         </div>
       }
       result={
@@ -114,14 +142,20 @@ function ScientificCalculator() {
     <Calc
       inputs={
         <>
-          <Field label="Expression"><TextInput value={expr} onChange={(e) => setExpr(e.target.value)} /></Field>
-          <Note>Supports + - * / ^, parentheses, pi, e, sqrt, sin, cos, tan, log, abs, round, pow.</Note>
+          <Field label="Expression">
+            <TextInput value={expr} onChange={(e) => setExpr(e.target.value)} />
+          </Field>
+          <Note>
+            Supports + - * / ^, parentheses, pi, e, sqrt, sin, cos, tan, log, abs, round, pow.
+          </Note>
         </>
       }
       result={
         <>
           <Stat label="Result" value={value} />
-          <Toolbar><CopyButton value={value} /></Toolbar>
+          <Toolbar>
+            <CopyButton value={value} />
+          </Toolbar>
         </>
       }
     />
@@ -139,9 +173,23 @@ function LoanCalculator({ title = "Monthly payment" }: { title?: string }) {
     <Calc
       inputs={
         <div className="grid gap-4 sm:grid-cols-2">
-          <Field label="Amount"><TextInput value={amount} inputMode="decimal" onChange={(e) => setAmount(e.target.value)} /></Field>
-          <Field label="Interest rate (%)"><TextInput value={rate} inputMode="decimal" onChange={(e) => setRate(e.target.value)} /></Field>
-          <Field label="Term (years)"><TextInput value={years} inputMode="decimal" onChange={(e) => setYears(e.target.value)} /></Field>
+          <Field label="Amount">
+            <TextInput
+              value={amount}
+              inputMode="decimal"
+              onChange={(e) => setAmount(e.target.value)}
+            />
+          </Field>
+          <Field label="Interest rate (%)">
+            <TextInput value={rate} inputMode="decimal" onChange={(e) => setRate(e.target.value)} />
+          </Field>
+          <Field label="Term (years)">
+            <TextInput
+              value={years}
+              inputMode="decimal"
+              onChange={(e) => setYears(e.target.value)}
+            />
+          </Field>
         </div>
       }
       result={
@@ -167,10 +215,25 @@ function GstCalculator() {
     <Calc
       inputs={
         <div className="grid gap-4 sm:grid-cols-2">
-          <Field label="Amount"><TextInput value={amount} inputMode="decimal" onChange={(e) => setAmount(e.target.value)} /></Field>
-          <Field label="Rate (%)"><TextInput value={rate} inputMode="decimal" onChange={(e) => setRate(e.target.value)} /></Field>
+          <Field label="Amount">
+            <TextInput
+              value={amount}
+              inputMode="decimal"
+              onChange={(e) => setAmount(e.target.value)}
+            />
+          </Field>
+          <Field label="Rate (%)">
+            <TextInput value={rate} inputMode="decimal" onChange={(e) => setRate(e.target.value)} />
+          </Field>
           <Field label="Mode">
-            <Select value={mode} onChange={(e) => setMode(e.target.value)} options={[{ value: "add", label: "Add GST" }, { value: "remove", label: "Remove GST" }]} />
+            <Select
+              value={mode}
+              onChange={(e) => setMode(e.target.value)}
+              options={[
+                { value: "add", label: "Add GST" },
+                { value: "remove", label: "Remove GST" },
+              ]}
+            />
           </Field>
         </div>
       }
@@ -193,8 +256,16 @@ function DiscountCalculator() {
     <Calc
       inputs={
         <div className="grid gap-4 sm:grid-cols-2">
-          <Field label="Original price"><TextInput value={price} inputMode="decimal" onChange={(e) => setPrice(e.target.value)} /></Field>
-          <Field label="Discount (%)"><TextInput value={off} inputMode="decimal" onChange={(e) => setOff(e.target.value)} /></Field>
+          <Field label="Original price">
+            <TextInput
+              value={price}
+              inputMode="decimal"
+              onChange={(e) => setPrice(e.target.value)}
+            />
+          </Field>
+          <Field label="Discount (%)">
+            <TextInput value={off} inputMode="decimal" onChange={(e) => setOff(e.target.value)} />
+          </Field>
         </div>
       }
       result={
@@ -207,7 +278,15 @@ function DiscountCalculator() {
   );
 }
 
-const RATES: Record<string, number> = { USD: 1, EUR: 0.92, GBP: 0.78, INR: 83.2, JPY: 151.4, AUD: 1.52, CAD: 1.36 };
+const RATES: Record<string, number> = {
+  USD: 1,
+  EUR: 0.92,
+  GBP: 0.78,
+  INR: 83.2,
+  JPY: 151.4,
+  AUD: 1.52,
+  CAD: 1.36,
+};
 
 function CurrencyConverter() {
   const [amount, setAmount] = useState("100");
@@ -219,9 +298,19 @@ function CurrencyConverter() {
     <Calc
       inputs={
         <div className="grid gap-4 sm:grid-cols-2">
-          <Field label="Amount"><TextInput value={amount} inputMode="decimal" onChange={(e) => setAmount(e.target.value)} /></Field>
-          <Field label="From"><Select value={from} onChange={(e) => setFrom(e.target.value)} options={opts} /></Field>
-          <Field label="To"><Select value={to} onChange={(e) => setTo(e.target.value)} options={opts} /></Field>
+          <Field label="Amount">
+            <TextInput
+              value={amount}
+              inputMode="decimal"
+              onChange={(e) => setAmount(e.target.value)}
+            />
+          </Field>
+          <Field label="From">
+            <Select value={from} onChange={(e) => setFrom(e.target.value)} options={opts} />
+          </Field>
+          <Field label="To">
+            <Select value={to} onChange={(e) => setTo(e.target.value)} options={opts} />
+          </Field>
         </div>
       }
       result={
@@ -242,8 +331,12 @@ function DateDifference() {
     <Calc
       inputs={
         <div className="grid gap-4 sm:grid-cols-2">
-          <Field label="Start date"><TextInput type="date" value={a} onChange={(e) => setA(e.target.value)} /></Field>
-          <Field label="End date"><TextInput type="date" value={b} onChange={(e) => setB(e.target.value)} /></Field>
+          <Field label="Start date">
+            <TextInput type="date" value={a} onChange={(e) => setA(e.target.value)} />
+          </Field>
+          <Field label="End date">
+            <TextInput type="date" value={b} onChange={(e) => setB(e.target.value)} />
+          </Field>
         </div>
       }
       result={
@@ -258,21 +351,39 @@ function DateDifference() {
   );
 }
 
-const ZONES = ["UTC", "America/New_York", "Europe/London", "Europe/Berlin", "Asia/Kolkata", "Asia/Tokyo", "Australia/Sydney"];
+const ZONES = [
+  "UTC",
+  "America/New_York",
+  "Europe/London",
+  "Europe/Berlin",
+  "Asia/Kolkata",
+  "Asia/Tokyo",
+  "Australia/Sydney",
+];
 
 function TimezoneConverter() {
   const [time, setTime] = useState(() => new Date().toISOString().slice(0, 16));
   const d = new Date(time);
   return (
     <Calc
-      inputs={<Field label="Local date & time"><TextInput type="datetime-local" value={time} onChange={(e) => setTime(e.target.value)} /></Field>}
+      inputs={
+        <Field label="Local date & time">
+          <TextInput type="datetime-local" value={time} onChange={(e) => setTime(e.target.value)} />
+        </Field>
+      }
       result={
         <div className="space-y-2 text-[13px]">
           {ZONES.map((z) => (
             <div key={z} className="flex justify-between rounded-xl bg-white/[0.03] px-3 py-2">
               <span className="text-white/60">{z.replace("_", " ")}</span>
               <span className="font-mono text-white/85">
-                {Number.isNaN(+d) ? "—" : d.toLocaleString(undefined, { timeZone: z, dateStyle: "medium", timeStyle: "short" })}
+                {Number.isNaN(+d)
+                  ? "—"
+                  : d.toLocaleString(undefined, {
+                      timeZone: z,
+                      dateStyle: "medium",
+                      timeStyle: "short",
+                    })}
               </span>
             </div>
           ))}
@@ -283,7 +394,14 @@ function TimezoneConverter() {
 }
 
 const UNITS: Record<string, Record<string, number>> = {
-  Length: { Metres: 1, Kilometres: 1000, Centimetres: 0.01, Miles: 1609.34, Feet: 0.3048, Inches: 0.0254 },
+  Length: {
+    Metres: 1,
+    Kilometres: 1000,
+    Centimetres: 0.01,
+    Miles: 1609.34,
+    Feet: 0.3048,
+    Inches: 0.0254,
+  },
   Weight: { Kilograms: 1, Grams: 0.001, Pounds: 0.453592, Ounces: 0.0283495, Tonnes: 1000 },
   Area: { "Square metres": 1, Hectares: 10000, "Square feet": 0.092903, Acres: 4046.86 },
   Volume: { Litres: 1, Millilitres: 0.001, "Cubic metres": 1000, Gallons: 3.78541 },
@@ -319,9 +437,19 @@ function UnitConverter() {
               options={Object.keys(UNITS).map((k) => ({ value: k, label: k }))}
             />
           </Field>
-          <Field label="Value"><TextInput value={value} inputMode="decimal" onChange={(e) => setValue(e.target.value)} /></Field>
-          <Field label="From"><Select value={from} onChange={(e) => setFrom(e.target.value)} options={opts} /></Field>
-          <Field label="To"><Select value={to} onChange={(e) => setTo(e.target.value)} options={opts} /></Field>
+          <Field label="Value">
+            <TextInput
+              value={value}
+              inputMode="decimal"
+              onChange={(e) => setValue(e.target.value)}
+            />
+          </Field>
+          <Field label="From">
+            <Select value={from} onChange={(e) => setFrom(e.target.value)} options={opts} />
+          </Field>
+          <Field label="To">
+            <Select value={to} onChange={(e) => setTo(e.target.value)} options={opts} />
+          </Field>
         </div>
       }
       result={<Stat label={`${value} ${from} =`} value={`${money(converted)} ${to}`} />}
@@ -334,7 +462,11 @@ function TemperatureNote() {
   const v = num(c);
   return (
     <Calc
-      inputs={<Field label="Celsius"><TextInput value={c} inputMode="decimal" onChange={(e) => setC(e.target.value)} /></Field>}
+      inputs={
+        <Field label="Celsius">
+          <TextInput value={c} inputMode="decimal" onChange={(e) => setC(e.target.value)} />
+        </Field>
+      }
       result={
         <div className="grid grid-cols-1 gap-3">
           <Stat label="Fahrenheit" value={money(v * 1.8 + 32)} />

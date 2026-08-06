@@ -79,14 +79,20 @@ function CanvasTool({
   return (
     <>
       <Panel title="Upload">
-        <UploadArea accept="image/*" onFiles={(f) => setFile(f[0] ?? null)} files={file ? [file] : []} />
+        <UploadArea
+          accept="image/*"
+          onFiles={(f) => setFile(f[0] ?? null)}
+          files={file ? [file] : []}
+        />
       </Panel>
       {settings ? <Panel title="Settings">{settings}</Panel> : null}
       <Grid>
         <Panel title="Live preview">
           <div className="flex min-h-[220px] items-center justify-center rounded-xl border border-white/[0.07] bg-black/30 p-3">
             <canvas ref={canvasRef} className="max-h-[340px] max-w-full rounded-lg" />
-            {!img ? <span className="text-[13px] text-white/40">Upload an image to preview</span> : null}
+            {!img ? (
+              <span className="text-[13px] text-white/40">Upload an image to preview</span>
+            ) : null}
           </div>
         </Panel>
         <Panel title="Result">
@@ -139,7 +145,16 @@ function Compressor() {
       filename="compressed"
       deps={[q]}
       draw={fit}
-      settings={<Range label="Quality" min={10} max={100} value={q} suffix="%" onChange={(e) => setQ(+e.target.value)} />}
+      settings={
+        <Range
+          label="Quality"
+          min={10}
+          max={100}
+          value={q}
+          suffix="%"
+          onChange={(e) => setQ(+e.target.value)}
+        />
+      }
     />
   );
 }
@@ -159,7 +174,15 @@ function Resizer() {
       }}
       settings={
         <div className="grid gap-4 sm:grid-cols-2">
-          <Range label="Width" min={64} max={4000} step={8} value={w} suffix="px" onChange={(e) => setW(+e.target.value)} />
+          <Range
+            label="Width"
+            min={64}
+            max={4000}
+            step={8}
+            value={w}
+            suffix="px"
+            onChange={(e) => setW(+e.target.value)}
+          />
           <Field label="Aspect ratio">
             <Select
               value={ratio ? "lock" : "free"}
@@ -196,10 +219,38 @@ function Cropper() {
       }}
       settings={
         <div className="grid gap-4 sm:grid-cols-2">
-          <Range label="Offset X" min={0} max={95} value={x} suffix="%" onChange={(e) => setX(+e.target.value)} />
-          <Range label="Offset Y" min={0} max={95} value={y} suffix="%" onChange={(e) => setY(+e.target.value)} />
-          <Range label="Width" min={5} max={100} value={w} suffix="%" onChange={(e) => setW(+e.target.value)} />
-          <Range label="Height" min={5} max={100} value={h} suffix="%" onChange={(e) => setH(+e.target.value)} />
+          <Range
+            label="Offset X"
+            min={0}
+            max={95}
+            value={x}
+            suffix="%"
+            onChange={(e) => setX(+e.target.value)}
+          />
+          <Range
+            label="Offset Y"
+            min={0}
+            max={95}
+            value={y}
+            suffix="%"
+            onChange={(e) => setY(+e.target.value)}
+          />
+          <Range
+            label="Width"
+            min={5}
+            max={100}
+            value={w}
+            suffix="%"
+            onChange={(e) => setW(+e.target.value)}
+          />
+          <Range
+            label="Height"
+            min={5}
+            max={100}
+            value={h}
+            suffix="%"
+            onChange={(e) => setH(+e.target.value)}
+          />
         </div>
       }
     />
@@ -233,7 +284,21 @@ function Converter({ fixed }: { fixed?: string }) {
   );
 }
 
-function Filter({ css, label, min, max, unit, def }: { css: (v: number) => string; label: string; min: number; max: number; unit: string; def: number }) {
+function Filter({
+  css,
+  label,
+  min,
+  max,
+  unit,
+  def,
+}: {
+  css: (v: number) => string;
+  label: string;
+  min: number;
+  max: number;
+  unit: string;
+  def: number;
+}) {
   const [v, setV] = useState(def);
   return (
     <CanvasTool
@@ -246,7 +311,16 @@ function Filter({ css, label, min, max, unit, def }: { css: (v: number) => strin
         ctx.drawImage(img, 0, 0);
         ctx.filter = "none";
       }}
-      settings={<Range label={label} min={min} max={max} value={v} suffix={unit} onChange={(e) => setV(+e.target.value)} />}
+      settings={
+        <Range
+          label={label}
+          min={min}
+          max={max}
+          value={v}
+          suffix={unit}
+          onChange={(e) => setV(+e.target.value)}
+        />
+      }
     />
   );
 }
@@ -268,7 +342,16 @@ function Rotate() {
         ctx.drawImage(img, -img.naturalWidth / 2, -img.naturalHeight / 2);
         ctx.setTransform(1, 0, 0, 1, 0, 0);
       }}
-      settings={<Range label="Angle" min={0} max={360} value={angle} suffix="°" onChange={(e) => setAngle(+e.target.value)} />}
+      settings={
+        <Range
+          label="Angle"
+          min={0}
+          max={360}
+          value={angle}
+          suffix="°"
+          onChange={(e) => setAngle(+e.target.value)}
+        />
+      }
     />
   );
 }
@@ -327,8 +410,22 @@ function Watermark() {
           <Field label="Watermark text">
             <TextInput value={text} onChange={(e) => setText(e.target.value)} />
           </Field>
-          <Range label="Size" min={2} max={20} value={size} suffix="%" onChange={(e) => setSize(+e.target.value)} />
-          <Range label="Opacity" min={5} max={100} value={opacity} suffix="%" onChange={(e) => setOpacity(+e.target.value)} />
+          <Range
+            label="Size"
+            min={2}
+            max={20}
+            value={size}
+            suffix="%"
+            onChange={(e) => setSize(+e.target.value)}
+          />
+          <Range
+            label="Opacity"
+            min={5}
+            max={100}
+            value={opacity}
+            suffix="%"
+            onChange={(e) => setOpacity(+e.target.value)}
+          />
         </div>
       }
     />
@@ -390,7 +487,9 @@ function ColorPicker() {
         />
       </Panel>
       <Panel title="Values">
-        <Output value={`HEX  ${color.toUpperCase()}\nRGB  rgb(${rgb.join(", ")})\nCSS  color: ${color};`} />
+        <Output
+          value={`HEX  ${color.toUpperCase()}\nRGB  rgb(${rgb.join(", ")})\nCSS  color: ${color};`}
+        />
         <Toolbar>
           <CopyButton value={color.toUpperCase()} label="Copy HEX" />
           <CopyButton value={`rgb(${rgb.join(", ")})`} label="Copy RGB" />
@@ -434,7 +533,11 @@ function Base64ToImage() {
   return (
     <Grid>
       <Panel title="Base64 input">
-        <TextArea value={data} onChange={(e) => setData(e.target.value)} placeholder="data:image/png;base64,…" />
+        <TextArea
+          value={data}
+          onChange={(e) => setData(e.target.value)}
+          placeholder="data:image/png;base64,…"
+        />
         <Toolbar>
           <Btn onClick={() => setData("")}>Reset</Btn>
         </Toolbar>
@@ -442,7 +545,11 @@ function Base64ToImage() {
       <Panel title="Preview">
         <div className="flex min-h-[220px] items-center justify-center rounded-xl border border-white/[0.07] bg-black/30 p-3">
           {valid ? (
-            <img src={data.trim()} alt="Decoded result" className="max-h-[300px] max-w-full rounded-lg" />
+            <img
+              src={data.trim()}
+              alt="Decoded result"
+              className="max-h-[300px] max-w-full rounded-lg"
+            />
           ) : (
             <span className="text-[13px] text-white/40">Paste a valid image data URL</span>
           )}
@@ -451,7 +558,9 @@ function Base64ToImage() {
           <Btn
             variant="primary"
             disabled={!valid}
-            onClick={async () => downloadBlob(await (await fetch(data.trim())).blob(), "decoded.png")}
+            onClick={async () =>
+              downloadBlob(await (await fetch(data.trim())).blob(), "decoded.png")
+            }
           >
             Download
           </Btn>
@@ -478,7 +587,15 @@ export function QrTool() {
           <TextInput value={text} onChange={(e) => setText(e.target.value)} />
         </Field>
         <div className="mt-4 grid gap-4 sm:grid-cols-2">
-          <Range label="Size" min={128} max={1024} step={16} value={size} suffix="px" onChange={(e) => setSize(+e.target.value)} />
+          <Range
+            label="Size"
+            min={128}
+            max={1024}
+            step={16}
+            value={size}
+            suffix="px"
+            onChange={(e) => setSize(+e.target.value)}
+          />
           <Field label="Foreground">
             <input
               type="color"
@@ -491,10 +608,16 @@ export function QrTool() {
       </Panel>
       <Panel title="Your QR code">
         <div className="flex min-h-[240px] items-center justify-center rounded-xl border border-white/[0.07] bg-black/30 p-4">
-          {url ? <img src={url} alt="Generated QR code" className="max-h-[280px] rounded-lg" /> : null}
+          {url ? (
+            <img src={url} alt="Generated QR code" className="max-h-[280px] rounded-lg" />
+          ) : null}
         </div>
         <Toolbar>
-          <Btn variant="primary" disabled={!url} onClick={async () => downloadBlob(await (await fetch(url)).blob(), "qr-code.png")}>
+          <Btn
+            variant="primary"
+            disabled={!url}
+            onClick={async () => downloadBlob(await (await fetch(url)).blob(), "qr-code.png")}
+          >
             Download PNG
           </Btn>
           <Btn onClick={() => setText("")}>Reset</Btn>
@@ -517,8 +640,19 @@ export const tools: Record<string, ToolComponent> = {
       <Note>Upload an .svg file to rasterize it into a high-quality PNG.</Note>
     </>
   ),
-  "image-blur": () => <Filter label="Blur" css={(v) => `blur(${v}px)`} min={0} max={40} unit="px" def={6} />,
-  "image-sharpen": () => <Filter label="Sharpen" css={(v) => `contrast(${100 + v}%) saturate(${100 + v / 2}%)`} min={0} max={100} unit="%" def={30} />,
+  "image-blur": () => (
+    <Filter label="Blur" css={(v) => `blur(${v}px)`} min={0} max={40} unit="px" def={6} />
+  ),
+  "image-sharpen": () => (
+    <Filter
+      label="Sharpen"
+      css={(v) => `contrast(${100 + v}%) saturate(${100 + v / 2}%)`}
+      min={0}
+      max={100}
+      unit="%"
+      def={30}
+    />
+  ),
   "image-rotate": Rotate,
   "image-flip": Flip,
   "color-picker": ColorPicker,

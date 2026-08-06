@@ -25,7 +25,10 @@ export function ToolShell({
       <div className="mx-auto w-full max-w-6xl px-6 pb-24">
         {/* Hero */}
         <header className="relative py-10 sm:py-14">
-          <nav aria-label="Breadcrumb" className="mb-6 flex flex-wrap items-center gap-1.5 text-[12px] text-white/45">
+          <nav
+            aria-label="Breadcrumb"
+            className="mb-6 flex flex-wrap items-center gap-1.5 text-[12px] text-white/45"
+          >
             <Link to="/tools" className="transition hover:text-white">
               All Tools
             </Link>
@@ -52,7 +55,9 @@ export function ToolShell({
 
         {/* Related */}
         <section className="mt-20">
-          <h2 className="font-display mb-5 text-[18px] font-semibold tracking-tight text-white">Related tools</h2>
+          <h2 className="font-display mb-5 text-[18px] font-semibold tracking-tight text-white">
+            Related tools
+          </h2>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {related.map((r) => (
               <Link

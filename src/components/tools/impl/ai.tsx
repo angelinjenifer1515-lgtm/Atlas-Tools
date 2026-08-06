@@ -17,12 +17,19 @@ function AiTool({
 }) {
   const [input, setInput] = useState("");
   const [option, setOption] = useState(options?.values[0] ?? "");
-  const out = useMemo(() => (input.trim() ? generate(input.trim(), option) : ""), [input, option, generate]);
+  const out = useMemo(
+    () => (input.trim() ? generate(input.trim(), option) : ""),
+    [input, option, generate],
+  );
 
   return (
     <Grid>
       <Panel title={inputLabel}>
-        <TextArea value={input} onChange={(e) => setInput(e.target.value)} placeholder={placeholder} />
+        <TextArea
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          placeholder={placeholder}
+        />
         {options ? (
           <div className="mt-4">
             <Field label={options.label}>
@@ -54,7 +61,11 @@ const STOP = new Set(
   ),
 );
 
-const sentences = (s: string) => s.match(/[^.!?\n]+[.!?]*/g)?.map((x) => x.trim()).filter(Boolean) ?? [];
+const sentences = (s: string) =>
+  s
+    .match(/[^.!?\n]+[.!?]*/g)
+    ?.map((x) => x.trim())
+    .filter(Boolean) ?? [];
 const words = (s: string) => s.toLowerCase().match(/[a-z''-]{2,}/g) ?? [];
 const titleCase = (s: string) => s.replace(/\b[a-z]/g, (c) => c.toUpperCase());
 
@@ -79,28 +90,88 @@ function summarize(text: string, count: number) {
 
 function keyTerms(text: string, n = 6) {
   const freq = new Map<string, number>();
-  for (const w of words(text)) if (!STOP.has(w) && w.length > 3) freq.set(w, (freq.get(w) ?? 0) + 1);
-  return [...freq.entries()].sort((a, b) => b[1] - a[1]).slice(0, n).map(([w]) => w);
+  for (const w of words(text))
+    if (!STOP.has(w) && w.length > 3) freq.set(w, (freq.get(w) ?? 0) + 1);
+  return [...freq.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, n)
+    .map(([w]) => w);
 }
 
 /* ------------------------------ grammar engine ----------------------------- */
 
 const MISSPELLINGS: Record<string, string> = {
-  teh: "the", adn: "and", recieve: "receive", recieved: "received", seperate: "separate",
-  definately: "definitely", occured: "occurred", untill: "until", wich: "which", becuase: "because",
-  alot: "a lot", accomodate: "accommodate", arguement: "argument", calender: "calendar",
-  cemetary: "cemetery", concious: "conscious", embarass: "embarrass", enviroment: "environment",
-  existance: "existence", goverment: "government", grammer: "grammar", independant: "independent",
-  neccessary: "necessary", noticable: "noticeable", occassion: "occasion", persistant: "persistent",
-  posession: "possession", publically: "publicly", refered: "referred", relevent: "relevant",
-  succesful: "successful", tommorow: "tomorrow", truely: "truly", wierd: "weird", writting: "writing",
-  thier: "their", freind: "friend", beleive: "believe", acheive: "achieve", knowlege: "knowledge",
-  begining: "beginning", commited: "committed", diffrent: "different", basicly: "basically",
-  everytime: "every time", inspite: "in spite", occurence: "occurrence", priviledge: "privilege",
-  wether: "whether", youre: "you're", dont: "don't", cant: "can't", wont: "won't", isnt: "isn't",
-  didnt: "didn't", doesnt: "doesn't", couldnt: "couldn't", shouldnt: "shouldn't", wouldnt: "wouldn't",
-  havent: "haven't", hasnt: "hasn't", wasnt: "wasn't", werent: "weren't", im: "I'm", ive: "I've",
-  ill: "I'll", id: "I'd", lets: "let's", thats: "that's", whats: "what's", theres: "there's",
+  teh: "the",
+  adn: "and",
+  recieve: "receive",
+  recieved: "received",
+  seperate: "separate",
+  definately: "definitely",
+  occured: "occurred",
+  untill: "until",
+  wich: "which",
+  becuase: "because",
+  alot: "a lot",
+  accomodate: "accommodate",
+  arguement: "argument",
+  calender: "calendar",
+  cemetary: "cemetery",
+  concious: "conscious",
+  embarass: "embarrass",
+  enviroment: "environment",
+  existance: "existence",
+  goverment: "government",
+  grammer: "grammar",
+  independant: "independent",
+  neccessary: "necessary",
+  noticable: "noticeable",
+  occassion: "occasion",
+  persistant: "persistent",
+  posession: "possession",
+  publically: "publicly",
+  refered: "referred",
+  relevent: "relevant",
+  succesful: "successful",
+  tommorow: "tomorrow",
+  truely: "truly",
+  wierd: "weird",
+  writting: "writing",
+  thier: "their",
+  freind: "friend",
+  beleive: "believe",
+  acheive: "achieve",
+  knowlege: "knowledge",
+  begining: "beginning",
+  commited: "committed",
+  diffrent: "different",
+  basicly: "basically",
+  everytime: "every time",
+  inspite: "in spite",
+  occurence: "occurrence",
+  priviledge: "privilege",
+  wether: "whether",
+  youre: "you're",
+  dont: "don't",
+  cant: "can't",
+  wont: "won't",
+  isnt: "isn't",
+  didnt: "didn't",
+  doesnt: "doesn't",
+  couldnt: "couldn't",
+  shouldnt: "shouldn't",
+  wouldnt: "wouldn't",
+  havent: "haven't",
+  hasnt: "hasn't",
+  wasnt: "wasn't",
+  werent: "weren't",
+  im: "I'm",
+  ive: "I've",
+  ill: "I'll",
+  id: "I'd",
+  lets: "let's",
+  thats: "that's",
+  whats: "what's",
+  theres: "there's",
 };
 
 export interface GrammarIssue {
@@ -157,7 +228,9 @@ export function checkGrammar(raw: string): { fixed: string; issues: GrammarIssue
     text = text.replace(/\b(\w+)(\s+)\1\b/gi, "$1");
   }
   // a / an
-  const anFix = text.replace(/\ba\s+(?=[aeiouAEIOU])/g, "an ").replace(/\ban\s+(?=[^aeiouAEIOU\s])/g, "a ");
+  const anFix = text
+    .replace(/\ba\s+(?=[aeiouAEIOU])/g, "an ")
+    .replace(/\ban\s+(?=[^aeiouAEIOU\s])/g, "a ");
   if (anFix !== text) {
     add("Grammar", "Corrected “a”/“an” before a vowel sound.");
     text = anFix;
@@ -182,9 +255,17 @@ export function checkGrammar(raw: string): { fixed: string; issues: GrammarIssue
     if (n > 32) add("Readability", `Long sentence (${n} words) — consider splitting it.`);
   });
   const passive = text.match(/\b(?:is|are|was|were|been|being)\s+\w+(?:ed|en)\b/gi);
-  if (passive) add("Style", `${passive.length} possible passive construction${passive.length > 1 ? "s" : ""} found.`);
+  if (passive)
+    add(
+      "Style",
+      `${passive.length} possible passive construction${passive.length > 1 ? "s" : ""} found.`,
+    );
   const fillers = text.match(/\b(very|really|just|actually|basically|literally)\b/gi);
-  if (fillers) add("Style", `Filler words used ${fillers.length}×: ${[...new Set(fillers.map((f) => f.toLowerCase()))].join(", ")}.`);
+  if (fillers)
+    add(
+      "Style",
+      `Filler words used ${fillers.length}×: ${[...new Set(fillers.map((f) => f.toLowerCase()))].join(", ")}.`,
+    );
 
   return { fixed: text, issues };
 }
@@ -212,19 +293,30 @@ function GrammarChecker() {
         </Toolbar>
         <div className="mt-5">
           <div className="mb-2 text-[11px] uppercase tracking-[0.18em] text-white/45">
-            {text.trim() ? `${issues.length} issue${issues.length === 1 ? "" : "s"} found` : "Issues"}
+            {text.trim()
+              ? `${issues.length} issue${issues.length === 1 ? "" : "s"} found`
+              : "Issues"}
           </div>
           {issues.length ? (
             <ul className="space-y-1.5">
               {issues.map((i, k) => (
-                <li key={`${i.type}-${k}`} className="rounded-lg border border-white/[0.07] bg-white/[0.02] px-3 py-2 text-[12.5px] text-white/70">
-                  <span className="mr-2 text-[10px] uppercase tracking-[0.16em] text-[color:var(--violet-soft)]">{i.type}</span>
+                <li
+                  key={`${i.type}-${k}`}
+                  className="rounded-lg border border-white/[0.07] bg-white/[0.02] px-3 py-2 text-[12.5px] text-white/70"
+                >
+                  <span className="mr-2 text-[10px] uppercase tracking-[0.16em] text-[color:var(--violet-soft)]">
+                    {i.type}
+                  </span>
                   {i.detail}
                 </li>
               ))}
             </ul>
           ) : (
-            <p className="text-[13px] text-white/45">{text.trim() ? "No issues detected — this reads cleanly." : "Start typing to see suggestions."}</p>
+            <p className="text-[13px] text-white/45">
+              {text.trim()
+                ? "No issues detected — this reads cleanly."
+                : "Start typing to see suggestions."}
+            </p>
           )}
         </div>
       </Panel>
@@ -235,15 +327,36 @@ function GrammarChecker() {
 /* -------------------------------- rewriting -------------------------------- */
 
 const FORMAL: Record<string, string> = {
-  "a lot": "considerably", kids: "children", stuff: "material", things: "items", get: "obtain",
-  got: "received", buy: "purchase", "find out": "determine", "come up with": "develop",
-  big: "significant", huge: "substantial", good: "strong", bad: "poor", "want to": "intend to",
-  "need to": "must", "so": "therefore", "but": "however", "also": "in addition",
+  "a lot": "considerably",
+  kids: "children",
+  stuff: "material",
+  things: "items",
+  get: "obtain",
+  got: "received",
+  buy: "purchase",
+  "find out": "determine",
+  "come up with": "develop",
+  big: "significant",
+  huge: "substantial",
+  good: "strong",
+  bad: "poor",
+  "want to": "intend to",
+  "need to": "must",
+  so: "therefore",
+  but: "however",
+  also: "in addition",
 };
 const EXPAND: Array<[RegExp, string]> = [
-  [/\bdon't\b/gi, "do not"], [/\bcan't\b/gi, "cannot"], [/\bwon't\b/gi, "will not"],
-  [/\bit's\b/gi, "it is"], [/\bI'm\b/g, "I am"], [/\bwe're\b/gi, "we are"], [/\byou're\b/gi, "you are"],
-  [/\bthat's\b/gi, "that is"], [/\bisn't\b/gi, "is not"], [/\bdoesn't\b/gi, "does not"],
+  [/\bdon't\b/gi, "do not"],
+  [/\bcan't\b/gi, "cannot"],
+  [/\bwon't\b/gi, "will not"],
+  [/\bit's\b/gi, "it is"],
+  [/\bI'm\b/g, "I am"],
+  [/\bwe're\b/gi, "we are"],
+  [/\byou're\b/gi, "you are"],
+  [/\bthat's\b/gi, "that is"],
+  [/\bisn't\b/gi, "is not"],
+  [/\bdoesn't\b/gi, "does not"],
 ];
 const CONTRACT: Array<[RegExp, string]> = EXPAND.map(([re, full]) => [
   new RegExp(`\\b${full}\\b`, "gi"),
@@ -254,7 +367,8 @@ function rewrite(text: string, tone: string) {
   let out = checkGrammar(text).fixed;
   if (tone === "Professional") {
     EXPAND.forEach(([re, full]) => (out = out.replace(re, full)));
-    for (const [k, v] of Object.entries(FORMAL)) out = out.replace(new RegExp(`\\b${k}\\b`, "gi"), v);
+    for (const [k, v] of Object.entries(FORMAL))
+      out = out.replace(new RegExp(`\\b${k}\\b`, "gi"), v);
   } else if (tone === "Friendly") {
     CONTRACT.forEach(([re, short]) => (out = out.replace(re, short)));
     out = out.replace(/\.(\s|$)/g, (m, s) => `!${s}`).replace(/!+/g, "!");
@@ -265,7 +379,9 @@ function rewrite(text: string, tone: string) {
       .replace(/\bdue to the fact that\b/gi, "because")
       .replace(/\bat this point in time\b/gi, "now")
       .replace(/\s{2,}/g, " ");
-    out = sentences(out).map((s) => s.trim()).join(" ");
+    out = sentences(out)
+      .map((s) => s.trim())
+      .join(" ");
   } else if (tone === "Persuasive") {
     out = sentences(out)
       .map((s, i) => (i === 0 ? s : s))
@@ -307,9 +423,15 @@ export const tools: Record<string, ToolComponent> = {
       options={{ label: "Tone", values: ["Professional", "Warm", "Direct"] }}
       generate={(s, tone) => {
         const topic = s.replace(/\.$/, "");
-        const subject = titleCase(keyTerms(s, 5).join(" ") || topic.split(" ").slice(0, 6).join(" "));
+        const subject = titleCase(
+          keyTerms(s, 5).join(" ") || topic.split(" ").slice(0, 6).join(" "),
+        );
         const open =
-          tone === "Warm" ? "Hi there,\n\nI hope your week is going well." : tone === "Direct" ? "Hi,\n" : "Hello,\n";
+          tone === "Warm"
+            ? "Hi there,\n\nI hope your week is going well."
+            : tone === "Direct"
+              ? "Hi,\n"
+              : "Hello,\n";
         const body =
           tone === "Direct"
             ? `I'm writing about ${topic}. Could you confirm the next step by end of week?`
@@ -338,7 +460,11 @@ export const tools: Record<string, ToolComponent> = {
             `Most people overlook ${terms[0] ?? "this"}. Here's what ${core} taught me about it.`,
           ].join("\n\n———\n\n");
         if (p === "X")
-          return [`${core} — and it delivered.`, `${titleCase(core)}. That's the post.`, `Nobody talks about ${terms[0] ?? core} enough. ${titleCase(core)}. ${tags}`].join("\n\n");
+          return [
+            `${core} — and it delivered.`,
+            `${titleCase(core)}. That's the post.`,
+            `Nobody talks about ${terms[0] ?? core} enough. ${titleCase(core)}. ${tags}`,
+          ].join("\n\n");
         return [
           `${titleCase(core)} ✨`,
           `${titleCase(core)} — saving this one for later. ${tags}`,
@@ -353,7 +479,10 @@ export const tools: Record<string, ToolComponent> = {
       placeholder="minimal workspace setup"
       generate={(s) => {
         const terms = keyTerms(s, 8);
-        const joined = terms.slice(0, 3).map((t) => t).join("");
+        const joined = terms
+          .slice(0, 3)
+          .map((t) => t)
+          .join("");
         const tags = [
           ...terms.map((t) => `#${t}`),
           joined ? `#${joined}` : "",
@@ -411,7 +540,10 @@ export const tools: Record<string, ToolComponent> = {
       inputLabel="Product details"
       placeholder="ceramic pour-over coffee dripper, matte black"
       generate={(s) => {
-        const parts = s.split(/[,;]/).map((x) => x.trim()).filter(Boolean);
+        const parts = s
+          .split(/[,;]/)
+          .map((x) => x.trim())
+          .filter(Boolean);
         const name = titleCase(parts[0] ?? s);
         const features = parts.slice(1);
         return [
@@ -422,7 +554,9 @@ export const tools: Record<string, ToolComponent> = {
           } is built to last and quietly beautiful on any surface.`,
           "",
           "Highlights",
-          ...(features.length ? features : ["Premium materials", "Considered, minimal design"]).map((f) => `• ${titleCase(f)}`),
+          ...(features.length ? features : ["Premium materials", "Considered, minimal design"]).map(
+            (f) => `• ${titleCase(f)}`,
+          ),
           "• Designed for everyday use",
           "",
           `Keywords: ${keyTerms(s, 6).join(", ")}`,

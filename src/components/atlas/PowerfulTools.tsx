@@ -7,8 +7,11 @@ export function PowerfulTools() {
       <div className="mx-auto max-w-6xl">
         <div className="mb-14 text-center">
           <h2 className="font-display text-balance text-[clamp(2rem,4.5vw,3.6rem)] font-semibold leading-[1.02] tracking-[-0.035em] text-white">
-            Powerful tools.<br />
-            <span className="text-white/60">Beautifully <span className="text-gradient-violet-inline">simple.</span></span>
+            Powerful tools.
+            <br />
+            <span className="text-white/60">
+              Beautifully <span className="text-gradient-violet-inline">simple.</span>
+            </span>
           </h2>
         </div>
 
@@ -88,16 +91,26 @@ export function PowerfulTools() {
 }
 
 function ToolCard({
-  Icon, title, desc, action, preview, slug,
+  Icon,
+  title,
+  desc,
+  action,
+  preview,
+  slug,
 }: {
   Icon: React.ComponentType<{ className?: string }>;
-  title: string; desc: string; action: string; preview: React.ReactNode; slug: string;
+  title: string;
+  desc: string;
+  action: string;
+  preview: React.ReactNode;
+  slug: string;
 }) {
   return (
     <Link
       to="/tools/$toolSlug"
       params={{ toolSlug: slug }}
-      className="card-elev group relative flex h-[300px] flex-col overflow-hidden rounded-2xl p-4 transition-all duration-500 hover:-translate-y-0.5 hover:border-white/[0.14]">
+      className="card-elev group relative flex h-[300px] flex-col overflow-hidden rounded-2xl p-4 transition-all duration-500 hover:-translate-y-0.5 hover:border-white/[0.14]"
+    >
       <div className="h-[120px] w-full overflow-hidden rounded-lg border border-white/[0.05]">
         {preview}
       </div>

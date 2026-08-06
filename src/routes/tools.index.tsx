@@ -12,7 +12,10 @@ export const Route = createFileRoute("/tools/")({
           "Browse every Atlas tool: image, PDF, text, calculators, AI, developer and business utilities. Free, private and instant in your browser.",
       },
       { property: "og:title", content: "All Tools — Atlas" },
-      { property: "og:description", content: "Every Atlas utility in one directory. Free forever." },
+      {
+        property: "og:description",
+        content: "Every Atlas utility in one directory. Free forever.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -29,7 +32,8 @@ function ToolsIndex() {
             All tools
           </h1>
           <p className="mt-4 max-w-xl text-[14.5px] leading-relaxed text-white/55">
-            Every utility Atlas offers, grouped by category. Free, no account, everything runs in your browser.
+            Every utility Atlas offers, grouped by category. Free, no account, everything runs in
+            your browser.
           </p>
         </header>
 
@@ -37,7 +41,9 @@ function ToolsIndex() {
           <section key={cat.slug} className="mt-14 first:mt-0">
             <div className="mb-5 flex items-end justify-between gap-4">
               <div>
-                <h2 className="font-display text-[18px] font-semibold tracking-tight text-white">{cat.name}</h2>
+                <h2 className="font-display text-[18px] font-semibold tracking-tight text-white">
+                  {cat.name}
+                </h2>
                 <p className="mt-1 text-[12.5px] text-white/50">{cat.desc}</p>
               </div>
               <Link

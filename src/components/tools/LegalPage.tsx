@@ -18,7 +18,9 @@ export function LegalPage({
       <div className="space-y-3">
         {sections.map((s) => (
           <section key={s.h} className="card-elev rounded-2xl p-6">
-            <h2 className="font-display text-[15px] font-semibold tracking-tight text-white">{s.h}</h2>
+            <h2 className="font-display text-[15px] font-semibold tracking-tight text-white">
+              {s.h}
+            </h2>
             <p className="mt-2 text-[13.5px] leading-relaxed text-white/55">{s.p}</p>
           </section>
         ))}

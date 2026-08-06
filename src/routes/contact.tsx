@@ -6,9 +6,15 @@ export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
       { title: "Contact — Atlas Tools" },
-      { name: "description", content: "Request a tool, report a bug or say hello to the team behind Atlas Tools." },
+      {
+        name: "description",
+        content: "Request a tool, report a bug or say hello to the team behind Atlas Tools.",
+      },
       { property: "og:title", content: "Contact — Atlas Tools" },
-      { property: "og:description", content: "Request a tool, report a bug or send feedback about Atlas Tools." },
+      {
+        property: "og:description",
+        content: "Request a tool, report a bug or send feedback about Atlas Tools.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],

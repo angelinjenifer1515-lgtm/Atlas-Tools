@@ -27,7 +27,9 @@ export function Panel({
     <section className={`card-elev rounded-2xl p-5 sm:p-6 ${className}`}>
       {title ? (
         <header className="mb-4">
-          <h2 className="font-display text-[15px] font-semibold tracking-tight text-white">{title}</h2>
+          <h2 className="font-display text-[15px] font-semibold tracking-tight text-white">
+            {title}
+          </h2>
           {hint ? <p className="mt-1 text-[12px] leading-relaxed text-white/50">{hint}</p> : null}
         </header>
       ) : null}
@@ -56,7 +58,9 @@ export function Field({
 }) {
   return (
     <label className={`block ${className}`}>
-      <span className="mb-1.5 block text-[11px] uppercase tracking-[0.18em] text-white/45">{label}</span>
+      <span className="mb-1.5 block text-[11px] uppercase tracking-[0.18em] text-white/45">
+        {label}
+      </span>
       {children}
     </label>
   );
@@ -69,13 +73,20 @@ export function TextInput(props: React.InputHTMLAttributes<HTMLInputElement>) {
 
 export function TextArea(props: React.TextareaHTMLAttributes<HTMLTextAreaElement>) {
   const { className = "", ...rest } = props;
-  return <textarea {...rest} className={`${inputBase} min-h-[180px] resize-y font-mono leading-relaxed ${className}`} />;
+  return (
+    <textarea
+      {...rest}
+      className={`${inputBase} min-h-[180px] resize-y font-mono leading-relaxed ${className}`}
+    />
+  );
 }
 
 export function Select({
   options,
   ...rest
-}: React.SelectHTMLAttributes<HTMLSelectElement> & { options: Array<{ value: string; label: string }> }) {
+}: React.SelectHTMLAttributes<HTMLSelectElement> & {
+  options: Array<{ value: string; label: string }>;
+}) {
   const { className = "", ...props } = rest;
   return (
     <select {...props} className={`${inputBase} appearance-none ${className}`}>
@@ -93,7 +104,11 @@ export function Range({
   value,
   suffix = "",
   ...rest
-}: React.InputHTMLAttributes<HTMLInputElement> & { label: string; value: number; suffix?: string }) {
+}: React.InputHTMLAttributes<HTMLInputElement> & {
+  label: string;
+  value: number;
+  suffix?: string;
+}) {
   return (
     <div>
       <div className="mb-1.5 flex items-center justify-between text-[11px] uppercase tracking-[0.18em] text-white/45">
@@ -285,7 +300,10 @@ export function UploadArea({
       {files && files.length > 0 ? (
         <ul className="mt-3 space-y-1.5 text-[12px] text-white/60">
           {files.map((f, i) => (
-            <li key={`${f.name}-${i}`} className="flex justify-between gap-3 rounded-lg bg-white/[0.03] px-3 py-1.5">
+            <li
+              key={`${f.name}-${i}`}
+              className="flex justify-between gap-3 rounded-lg bg-white/[0.03] px-3 py-1.5"
+            >
               <span className="truncate">{f.name}</span>
               <span className="shrink-0 font-mono text-white/40">{formatBytes(f.size)}</span>
             </li>
@@ -308,7 +326,9 @@ export function Stat({ label, value }: { label: string; value: ReactNode }) {
   return (
     <div className="rounded-xl border border-white/[0.07] bg-white/[0.02] px-3.5 py-3">
       <div className="text-[10px] uppercase tracking-[0.2em] text-white/40">{label}</div>
-      <div className="mt-1 font-display text-[20px] font-semibold tracking-tight text-white">{value}</div>
+      <div className="mt-1 font-display text-[20px] font-semibold tracking-tight text-white">
+        {value}
+      </div>
     </div>
   );
 }

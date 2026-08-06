@@ -13,7 +13,8 @@ export function Testimonials() {
       <div className="mx-auto max-w-6xl">
         <div className="text-center">
           <h2 className="font-display mx-auto max-w-3xl text-balance text-[clamp(2rem,4.5vw,3.4rem)] font-semibold leading-[1.02] tracking-[-0.035em] text-white">
-            Loved by <span className="text-gradient-violet-inline">millions</span><br />
+            Loved by <span className="text-gradient-violet-inline">millions</span>
+            <br />
             around the world.
           </h2>
         </div>

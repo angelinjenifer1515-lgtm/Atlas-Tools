@@ -6,9 +6,17 @@ export const Route = createFileRoute("/privacy")({
   head: () => ({
     meta: [
       { title: "Privacy Policy — Atlas Tools" },
-      { name: "description", content: "How Atlas Tools handles your data: every tool runs locally in your browser and nothing is uploaded." },
+      {
+        name: "description",
+        content:
+          "How Atlas Tools handles your data: every tool runs locally in your browser and nothing is uploaded.",
+      },
       { property: "og:title", content: "Privacy Policy — Atlas Tools" },
-      { property: "og:description", content: "Atlas Tools processes everything client-side. No uploads, no accounts, no tracking of your content." },
+      {
+        property: "og:description",
+        content:
+          "Atlas Tools processes everything client-side. No uploads, no accounts, no tracking of your content.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],

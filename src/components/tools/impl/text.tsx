@@ -49,7 +49,11 @@ function TransformTool({
       {settings ? <Panel title="Settings">{settings}</Panel> : null}
       <Grid>
         <Panel title="Input">
-          <TextArea value={input} onChange={(e) => setInput(e.target.value)} placeholder={placeholder} />
+          <TextArea
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder={placeholder}
+          />
           <Toolbar>
             <Btn onClick={() => setInput("")}>Reset</Btn>
           </Toolbar>
@@ -86,7 +90,11 @@ function WordCounter() {
   return (
     <Grid>
       <Panel title="Your text">
-        <TextArea value={text} onChange={(e) => setText(e.target.value)} placeholder="Start typing or paste text…" />
+        <TextArea
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          placeholder="Start typing or paste text…"
+        />
         <Toolbar>
           <Btn onClick={() => setText("")}>Reset</Btn>
           <CopyButton value={text} />
@@ -112,7 +120,11 @@ function CharacterCounter() {
   return (
     <Grid>
       <Panel title="Your text">
-        <TextArea value={text} onChange={(e) => setText(e.target.value)} placeholder="Type to count characters…" />
+        <TextArea
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          placeholder="Type to count characters…"
+        />
         <Toolbar>
           <Btn onClick={() => setText("")}>Reset</Btn>
           <CopyButton value={text} />
@@ -137,14 +149,28 @@ const CASES: Record<string, (s: string) => string> = {
   lowercase: (s) => s.toLowerCase(),
   "Title Case": (s) => s.replace(/\w\S*/g, (w) => w[0].toUpperCase() + w.slice(1).toLowerCase()),
   "Sentence case": (s) => s.toLowerCase().replace(/(^\s*\w|[.!?]\s*\w)/g, (c) => c.toUpperCase()),
-  "camelCase": (s) =>
+  camelCase: (s) =>
     s
       .toLowerCase()
       .replace(/[^a-z0-9]+(.)/g, (_, c: string) => c.toUpperCase())
       .replace(/[^a-zA-Z0-9]/g, ""),
-  "snake_case": (s) => s.trim().toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_|_$/g, ""),
-  "kebab-case": (s) => s.trim().toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""),
-  "aLtErNaTiNg": (s) => s.split("").map((c, i) => (i % 2 ? c.toUpperCase() : c.toLowerCase())).join(""),
+  snake_case: (s) =>
+    s
+      .trim()
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "_")
+      .replace(/^_|_$/g, ""),
+  "kebab-case": (s) =>
+    s
+      .trim()
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-|-$/g, ""),
+  aLtErNaTiNg: (s) =>
+    s
+      .split("")
+      .map((c, i) => (i % 2 ? c.toUpperCase() : c.toLowerCase()))
+      .join(""),
 };
 
 function CaseConverter() {
@@ -174,7 +200,7 @@ function LoremIpsum() {
     );
   const text = useMemo(() => {
     let seed = 42;
-    const rnd = () => ((seed = (seed * 1103515245 + 12345) % 2147483648) / 2147483648);
+    const rnd = () => (seed = (seed * 1103515245 + 12345) % 2147483648) / 2147483648;
     const out: string[] = [];
     for (let p = 0; p < paras; p++) {
       const s: string[] = [];
@@ -192,7 +218,13 @@ function LoremIpsum() {
     <>
       <Panel title="Settings">
         <div className="grid gap-4 sm:grid-cols-2">
-          <Range label="Paragraphs" min={1} max={12} value={paras} onChange={(e) => setParas(+e.target.value)} />
+          <Range
+            label="Paragraphs"
+            min={1}
+            max={12}
+            value={paras}
+            onChange={(e) => setParas(+e.target.value)}
+          />
           <Range
             label="Sentences each"
             min={1}
@@ -326,7 +358,9 @@ function markdownToHtml(md: string) {
 }
 
 function MarkdownPreview() {
-  const [md, setMd] = useState("# Hello Atlas\n\nWrite **markdown** and see it *render* instantly.\n\n- Fast\n- Private\n- Free");
+  const [md, setMd] = useState(
+    "# Hello Atlas\n\nWrite **markdown** and see it *render* instantly.\n\n- Fast\n- Private\n- Free",
+  );
   const html = useMemo(() => markdownToHtml(md), [md]);
   return (
     <Grid>
@@ -358,7 +392,13 @@ function JsonFormatter() {
       transform={(s) => (s.trim() ? JSON.stringify(JSON.parse(s), null, minify ? 0 : indent) : "")}
       settings={
         <div className="grid gap-4 sm:grid-cols-2">
-          <Range label="Indent" min={0} max={8} value={indent} onChange={(e) => setIndent(+e.target.value)} />
+          <Range
+            label="Indent"
+            min={0}
+            max={8}
+            value={indent}
+            onChange={(e) => setIndent(+e.target.value)}
+          />
           <Toggle label="Minify output" checked={minify} onChange={setMinify} />
         </div>
       }
@@ -380,7 +420,11 @@ function JsonValidator() {
   return (
     <Grid>
       <Panel title="JSON input">
-        <TextArea value={text} onChange={(e) => setText(e.target.value)} placeholder="Paste JSON to validate…" />
+        <TextArea
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          placeholder="Paste JSON to validate…"
+        />
         <Toolbar>
           <Btn onClick={() => setText("")}>Reset</Btn>
         </Toolbar>
@@ -421,20 +465,32 @@ function PasswordGenerator() {
     return Array.from(buf, (n) => chars[n % chars.length]).join("");
   }, [len, upper, nums, syms, seed]);
 
-  const strength = Math.min(100, Math.round((len * (upper ? 1.2 : 1) * (nums ? 1.15 : 1) * (syms ? 1.25 : 1)) * 2.6));
+  const strength = Math.min(
+    100,
+    Math.round(len * (upper ? 1.2 : 1) * (nums ? 1.15 : 1) * (syms ? 1.25 : 1) * 2.6),
+  );
 
   return (
     <>
       <Panel title="Settings">
         <div className="grid gap-4 sm:grid-cols-2">
-          <Range label="Length" min={6} max={64} value={len} onChange={(e) => setLen(+e.target.value)} />
+          <Range
+            label="Length"
+            min={6}
+            max={64}
+            value={len}
+            onChange={(e) => setLen(+e.target.value)}
+          />
           <Toggle label="Uppercase letters" checked={upper} onChange={setUpper} />
           <Toggle label="Numbers" checked={nums} onChange={setNums} />
           <Toggle label="Symbols" checked={syms} onChange={setSyms} />
         </div>
       </Panel>
       <Panel title="Your password">
-        <div className="break-all rounded-xl border border-white/[0.07] bg-black/30 p-4 font-mono text-[15px] text-white" aria-live="polite">
+        <div
+          className="break-all rounded-xl border border-white/[0.07] bg-black/30 p-4 font-mono text-[15px] text-white"
+          aria-live="polite"
+        >
           {mounted ? pwd : "—"}
         </div>
         <div className="mt-3 h-1.5 w-full overflow-hidden rounded-full bg-white/10">
@@ -465,7 +521,13 @@ function UuidGenerator() {
   return (
     <>
       <Panel title="Settings">
-        <Range label="How many" min={1} max={100} value={count} onChange={(e) => setCount(+e.target.value)} />
+        <Range
+          label="How many"
+          min={1}
+          max={100}
+          value={count}
+          onChange={(e) => setCount(+e.target.value)}
+        />
       </Panel>
       <Panel title="UUID v4">
         <Output value={mounted ? ids : "—"} />
@@ -615,19 +677,33 @@ export const tools: Record<string, ToolComponent> = {
   "markdown-preview": MarkdownPreview,
   "json-formatter": JsonFormatter,
   "json-validator": JsonValidator,
-  "xml-formatter": () => <TransformTool transform={formatXml} filename="formatted.xml" placeholder="<root><a>1</a></root>" />,
+  "xml-formatter": () => (
+    <TransformTool
+      transform={formatXml}
+      filename="formatted.xml"
+      placeholder="<root><a>1</a></root>"
+    />
+  ),
   "html-formatter": () => <TransformTool transform={formatHtml} filename="formatted.html" />,
   "html-minifier": () => (
     <TransformTool
       filename="minified.html"
-      transform={(s) => s.replace(/<!--[\s\S]*?-->/g, "").replace(/>\s+</g, "><").replace(/\s{2,}/g, " ").trim()}
+      transform={(s) =>
+        s
+          .replace(/<!--[\s\S]*?-->/g, "")
+          .replace(/>\s+</g, "><")
+          .replace(/\s{2,}/g, " ")
+          .trim()
+      }
     />
   ),
   "css-minifier": () => <TransformTool transform={minifyCss} filename="styles.min.css" />,
   "js-minifier": () => (
     <>
       <TransformTool transform={minifyJs} filename="script.min.js" />
-      <Note>Whitespace and comment stripping only — safe for simple scripts, not a full compiler.</Note>
+      <Note>
+        Whitespace and comment stripping only — safe for simple scripts, not a full compiler.
+      </Note>
     </>
   ),
   "csv-viewer": CsvViewer,
@@ -660,7 +736,9 @@ export const tools: Record<string, ToolComponent> = {
           const t = v == null ? "" : String(v);
           return /[",\n]/.test(t) ? `"${t.replace(/"/g, '""')}"` : t;
         };
-        return [keys.join(","), ...arr.map((o) => keys.map((k) => cell(o?.[k])).join(","))].join("\n");
+        return [keys.join(","), ...arr.map((o) => keys.map((k) => cell(o?.[k])).join(","))].join(
+          "\n",
+        );
       }}
     />
   ),
@@ -675,7 +753,11 @@ export const tools: Record<string, ToolComponent> = {
   ),
   "base64-decoder": () => (
     <TransformTool
-      transform={(s) => (s.trim() ? new TextDecoder().decode(Uint8Array.from(atob(s.trim()), (c) => c.charCodeAt(0))) : "")}
+      transform={(s) =>
+        s.trim()
+          ? new TextDecoder().decode(Uint8Array.from(atob(s.trim()), (c) => c.charCodeAt(0)))
+          : ""
+      }
       filename="decoded.txt"
     />
   ),

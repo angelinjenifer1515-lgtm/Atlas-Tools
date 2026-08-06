@@ -24,7 +24,11 @@ export function Footer() {
         <nav aria-label="Footer" className="flex items-center gap-3 text-[13px] text-white/55">
           {LINKS.map((l, i) => (
             <span key={l.label} className="flex items-center gap-3">
-              {i > 0 ? <span aria-hidden="true" className="text-white/20">•</span> : null}
+              {i > 0 ? (
+                <span aria-hidden="true" className="text-white/20">
+                  •
+                </span>
+              ) : null}
               <Link
                 to={l.to}
                 className="rounded transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--violet)]/40"

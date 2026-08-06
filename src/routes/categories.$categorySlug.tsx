@@ -1,7 +1,12 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ChevronRight } from "lucide-react";
 import { PageShell } from "@/components/tools/PageShell";
-import { CATEGORY_BY_SLUG, toolsInCategory, type CategorySlug, type ToolMeta } from "@/lib/tools/registry";
+import {
+  CATEGORY_BY_SLUG,
+  toolsInCategory,
+  type CategorySlug,
+  type ToolMeta,
+} from "@/lib/tools/registry";
 
 export const Route = createFileRoute("/categories/$categorySlug")({
   loader: ({ params }) => {
@@ -11,14 +16,22 @@ export const Route = createFileRoute("/categories/$categorySlug")({
   },
   head: ({ loaderData }) => {
     if (!loaderData) {
-      return { meta: [{ title: "Category not found — Atlas Tools" }, { name: "robots", content: "noindex" }] };
+      return {
+        meta: [
+          { title: "Category not found — Atlas Tools" },
+          { name: "robots", content: "noindex" },
+        ],
+      };
     }
     const { category } = loaderData;
     const title = `${category.name} — Free Online ${category.name} | Atlas`;
     return {
       meta: [
         { title },
-        { name: "description", content: `${category.desc} Every tool is free and runs entirely in your browser.` },
+        {
+          name: "description",
+          content: `${category.desc} Every tool is free and runs entirely in your browser.`,
+        },
         { property: "og:title", content: title },
         { property: "og:description", content: category.desc },
         { property: "og:type", content: "website" },
@@ -37,7 +50,10 @@ function CategoryPage() {
     <PageShell>
       <div className="mx-auto w-full max-w-6xl px-6 pb-24">
         <header className="py-10 sm:py-14">
-          <nav aria-label="Breadcrumb" className="mb-6 flex flex-wrap items-center gap-1.5 text-[12px] text-white/45">
+          <nav
+            aria-label="Breadcrumb"
+            className="mb-6 flex flex-wrap items-center gap-1.5 text-[12px] text-white/45"
+          >
             <Link to="/categories" className="transition hover:text-white">
               Categories
             </Link>
@@ -47,7 +63,9 @@ function CategoryPage() {
           <h1 className="font-display text-balance text-[clamp(2.1rem,5vw,3.4rem)] font-semibold leading-[1.02] tracking-[-0.04em] text-white">
             {category.name}
           </h1>
-          <p className="mt-4 max-w-xl text-[14.5px] leading-relaxed text-white/55">{category.desc}</p>
+          <p className="mt-4 max-w-xl text-[14.5px] leading-relaxed text-white/55">
+            {category.desc}
+          </p>
         </header>
 
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">

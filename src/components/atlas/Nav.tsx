@@ -48,7 +48,8 @@ export function Nav() {
           className="group relative overflow-hidden rounded-[12px] border border-white/[0.12] px-4 py-2 text-[13px] font-medium text-white/90 transition-all duration-300 hover:border-white/25 hover:text-white"
           style={{
             background: "rgba(124,92,255,0.14)",
-            boxShadow: "inset 0 1px 0 rgba(255,255,255,0.12), 0 8px 26px -14px rgba(124,92,255,0.9)",
+            boxShadow:
+              "inset 0 1px 0 rgba(255,255,255,0.12), 0 8px 26px -14px rgba(124,92,255,0.9)",
           }}
         >
           Explore Tools

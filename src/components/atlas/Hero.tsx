@@ -13,7 +13,6 @@ export function Hero() {
       </div>
       <div className="pointer-events-none absolute inset-0 grain mask-fade-b" />
 
-
       <div className="relative mx-auto grid max-w-7xl grid-cols-1 items-center gap-10 px-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)]">
         {/* Left: copy */}
         <div className="relative z-10 max-w-xl">
@@ -28,7 +27,8 @@ export function Hero() {
           </h1>
 
           <p className="mt-7 max-w-[700px] text-[15px] leading-relaxed tracking-wide text-white/55 font-normal">
-            Hundreds of beautifully crafted online utilities. Completely free, no sign-ups, no downloads, everything runs instantly in your browser.
+            Hundreds of beautifully crafted online utilities. Completely free, no sign-ups, no
+            downloads, everything runs instantly in your browser.
           </p>
           <p className="mt-2 max-w-[700px] text-[15px] leading-relaxed tracking-wide text-white/55 font-normal">
             New possibilities, continuously added.
@@ -38,7 +38,9 @@ export function Hero() {
             <MagneticButton
               variant="primary"
               onClick={() =>
-                document.getElementById("categories")?.scrollIntoView({ behavior: "smooth", block: "start" })
+                document
+                  .getElementById("categories")
+                  ?.scrollIntoView({ behavior: "smooth", block: "start" })
               }
             >
               Explore Tools <ArrowRight className="h-4 w-4" />
@@ -89,16 +91,15 @@ export function Hero() {
             "linear-gradient(to bottom, transparent, rgba(26,20,70,0.14) 45%, rgba(124,92,255,0.07) 78%, transparent)",
         }}
       />
-
     </section>
   );
 }
 
 function StatsRow() {
   const stats = [
-    { value: "2.4M+",  label: "Users Worldwide" },
+    { value: "2.4M+", label: "Users Worldwide" },
     { value: "12.7M+", label: "Tasks Completed Today" },
-    { value: "100+",   label: "Powerful Tools" },
+    { value: "100+", label: "Powerful Tools" },
     { value: "99.98%", label: "Uptime Guaranteed" },
   ];
   return (
@@ -107,7 +108,9 @@ function StatsRow() {
         <div key={s.label} className="flex items-start gap-3">
           <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-[color:var(--violet)] shadow-[0_0_16px_rgba(167,139,250,0.7)]" />
           <div className="min-w-0">
-            <div className="font-display text-[22px] font-semibold tracking-tight text-white">{s.value}</div>
+            <div className="font-display text-[22px] font-semibold tracking-tight text-white">
+              {s.value}
+            </div>
             <div className="text-[12px] text-white/50">{s.label}</div>
           </div>
         </div>

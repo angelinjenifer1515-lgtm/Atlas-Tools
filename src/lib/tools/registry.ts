@@ -24,13 +24,48 @@ export interface CategoryMeta {
 }
 
 export const CATEGORIES: CategoryMeta[] = [
-  { slug: "image-tools", name: "Image Tools", desc: "Edit, convert and optimize beautifully.", glow: "rgba(90,220,150,0.28)" },
-  { slug: "pdf-tools", name: "PDF Tools", desc: "Everything you need for PDF documents.", glow: "rgba(255,120,80,0.30)" },
-  { slug: "text-tools", name: "Text Tools", desc: "Clean, format and transform any text.", glow: "rgba(167,139,250,0.32)" },
-  { slug: "calculators", name: "Calculators", desc: "Fast, precise everyday calculations.", glow: "rgba(220,180,90,0.28)" },
-  { slug: "ai-tools", name: "AI Tools", desc: "Smart utilities for modern problems.", glow: "rgba(167,139,250,0.35)" },
-  { slug: "developer-tools", name: "Developer Tools", desc: "Built for speed and precision.", glow: "rgba(90,150,255,0.30)" },
-  { slug: "business-tools", name: "Business Tools", desc: "Documents and numbers, handled.", glow: "rgba(124,92,255,0.30)" },
+  {
+    slug: "image-tools",
+    name: "Image Tools",
+    desc: "Edit, convert and optimize beautifully.",
+    glow: "rgba(90,220,150,0.28)",
+  },
+  {
+    slug: "pdf-tools",
+    name: "PDF Tools",
+    desc: "Everything you need for PDF documents.",
+    glow: "rgba(255,120,80,0.30)",
+  },
+  {
+    slug: "text-tools",
+    name: "Text Tools",
+    desc: "Clean, format and transform any text.",
+    glow: "rgba(167,139,250,0.32)",
+  },
+  {
+    slug: "calculators",
+    name: "Calculators",
+    desc: "Fast, precise everyday calculations.",
+    glow: "rgba(220,180,90,0.28)",
+  },
+  {
+    slug: "ai-tools",
+    name: "AI Tools",
+    desc: "Smart utilities for modern problems.",
+    glow: "rgba(167,139,250,0.35)",
+  },
+  {
+    slug: "developer-tools",
+    name: "Developer Tools",
+    desc: "Built for speed and precision.",
+    glow: "rgba(90,150,255,0.30)",
+  },
+  {
+    slug: "business-tools",
+    name: "Business Tools",
+    desc: "Documents and numbers, handled.",
+    glow: "rgba(124,92,255,0.30)",
+  },
 ];
 
 const t = (
@@ -47,7 +82,11 @@ const t = (
 
 export const TOOLS: ToolMeta[] = [
   ...t("image-tools", [
-    ["image-compressor", "Image Compressor", "Reduce image file size without losing visible quality."],
+    [
+      "image-compressor",
+      "Image Compressor",
+      "Reduce image file size without losing visible quality.",
+    ],
     ["image-resizer", "Image Resizer", "Resize images to exact pixel dimensions."],
     ["image-cropper", "Image Cropper", "Crop any image with precise control."],
     ["image-converter", "Image Converter", "Convert between JPG, PNG and WebP."],
@@ -127,7 +166,6 @@ export const TOOLS: ToolMeta[] = [
     ["blog-title-generator", "Blog Title Generator", "Headline ideas that get clicks."],
     ["prompt-generator", "Prompt Generator", "Build structured AI prompts."],
     ["product-description-generator", "Product Description Generator", "Store-ready product copy."],
-    
   ]),
   ...t("developer-tools", [
     ["color-converter", "Color Converter", "HEX, RGB and HSL in sync."],

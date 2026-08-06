@@ -41,4 +41,4 @@ src/
 
 ## User preferences
 
-*(Add any preferences here as you work with Replit Agent.)*
+_(Add any preferences here as you work with Replit Agent.)_
