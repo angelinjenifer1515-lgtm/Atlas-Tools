@@ -28,7 +28,7 @@ export function Hero() {
           </h1>
 
           <p className="mt-7 max-w-[700px] text-[15px] leading-relaxed tracking-wide text-white/55 font-normal">
-            Hundreds of beautifully crafted online utilities. Completely free, no sign-ups, no downloads, everything runs instantly in your browser.
+            Hundreds of beautifully crafted online utilities. Completely free, no sign-ups, no downloads, everything runs instantly in your browser. New possibilities, continuously added.
           </p>
 
           <div className="mt-9 flex flex-wrap items-center gap-4">
