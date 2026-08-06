@@ -309,7 +309,7 @@ function UnixTimeConverter() {
   const [date, setDate] = useState("");
   useEffect(() => setDate(new Date().toISOString().slice(0, 16)), []);
   const d = new Date(date);
-  const out = !ts || Number.isNaN(+d) ? "—" : `Seconds       ${Math.floor(+d / 1000)}\nMilliseconds  ${+d}`;
+  const out = !date || Number.isNaN(+d) ? "—" : `Seconds       ${Math.floor(+d / 1000)}\nMilliseconds  ${+d}`;
   return (
     <Grid>
       <Panel title="Date & time">

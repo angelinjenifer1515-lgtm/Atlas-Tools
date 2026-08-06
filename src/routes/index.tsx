@@ -17,7 +17,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Atlas Tools is the internet's most thoughtfully crafted collection of online utilities. Hundreds of premium tools, free forever, running instantly in your browser.",
+          "Hundreds of beautifully crafted online utilities. Completely free, no sign-ups, no downloads, everything runs instantly in your browser. New possibilities, continuously added.",
       },
       { property: "og:title", content: "Atlas Tools — Everything. Beautifully Organized." },
       {
