@@ -18,11 +18,7 @@ export function Footer() {
         </Link>
 
         <p className="text-[13px] leading-relaxed text-white/40">
-          © {new Date().getFullYear()} Atlas Tools. Crafted by{" "}
-          <span className="bg-gradient-to-r from-[#B9AFFF] via-[#C9C2FF] to-[#9FB6FF] bg-clip-text font-medium text-transparent opacity-85 transition-opacity duration-300 hover:opacity-100">
-            Angelin Jenifer
-          </span>
-          . All rights reserved.
+          © {new Date().getFullYear()} Atlas Tools. All rights reserved.
         </p>
 
         <nav aria-label="Footer" className="flex items-center gap-3 text-[13px] text-white/55">
