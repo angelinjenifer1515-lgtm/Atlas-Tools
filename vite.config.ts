@@ -16,6 +16,7 @@ export default defineConfig({
   },
   // Replit preview requires port 5000 and all hosts allowed
   vite: {
+    plugins: [mcpPlugin()],
     server: {
       port: 5000,
       host: true,
@@ -23,4 +24,5 @@ export default defineConfig({
       allowedHosts: true,
     },
   },
+
 });

@@ -11,12 +11,16 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as McpRouteImport } from './routes/mcp'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as TermsRouteImport } from './routes/terms'
+import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
+import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
 import { Route as CategoriesIndexRouteImport } from './routes/categories.index'
 import { Route as CategoriesCategorySlugRouteImport } from './routes/categories.$categorySlug'
 import { Route as ToolsIndexRouteImport } from './routes/tools.index'
 import { Route as ToolsToolSlugRouteImport } from './routes/tools.$toolSlug'
+import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -26,6 +30,11 @@ const IndexRoute = IndexRouteImport.update({
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const McpRoute = McpRouteImport.update({
+  id: '/mcp',
+  path: '/mcp',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PrivacyRoute = PrivacyRouteImport.update({
@@ -38,6 +47,18 @@ const TermsRoute = TermsRouteImport.update({
   path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
+const Char91DotmcpChar93ListToolsRoute =
+  Char91DotmcpChar93ListToolsRouteImport.update({
+    id: '/.mcp/list-tools',
+    path: '/.mcp/list-tools',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const Char91DotwellKnownChar93OauthProtectedResourceRoute =
+  Char91DotwellKnownChar93OauthProtectedResourceRouteImport.update({
+    id: '/.well-known/oauth-protected-resource',
+    path: '/.well-known/oauth-protected-resource',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const CategoriesIndexRoute = CategoriesIndexRouteImport.update({
   id: '/categories/',
   path: '/categories/',
@@ -58,80 +79,114 @@ const ToolsToolSlugRoute = ToolsToolSlugRouteImport.update({
   path: '/tools/$toolSlug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const Char91DotmcpChar93InvokeToolToolRoute =
+  Char91DotmcpChar93InvokeToolToolRouteImport.update({
+    id: '/.mcp/invoke-tool/$tool',
+    path: '/.mcp/invoke-tool/$tool',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
+  '/mcp': typeof McpRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
+  '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
+  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/categories/$categorySlug': typeof CategoriesCategorySlugRoute
   '/tools/$toolSlug': typeof ToolsToolSlugRoute
   '/categories/': typeof CategoriesIndexRoute
   '/tools/': typeof ToolsIndexRoute
+  '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
+  '/mcp': typeof McpRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
+  '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
+  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/categories/$categorySlug': typeof CategoriesCategorySlugRoute
   '/tools/$toolSlug': typeof ToolsToolSlugRoute
   '/categories': typeof CategoriesIndexRoute
   '/tools': typeof ToolsIndexRoute
+  '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
+  '/mcp': typeof McpRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
+  '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
+  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/categories/$categorySlug': typeof CategoriesCategorySlugRoute
   '/tools/$toolSlug': typeof ToolsToolSlugRoute
   '/categories/': typeof CategoriesIndexRoute
   '/tools/': typeof ToolsIndexRoute
+  '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/contact'
+    | '/mcp'
     | '/privacy'
     | '/terms'
+    | '/.mcp/list-tools'
+    | '/.well-known/oauth-protected-resource'
     | '/categories/$categorySlug'
     | '/tools/$toolSlug'
     | '/categories/'
     | '/tools/'
+    | '/.mcp/invoke-tool/$tool'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/contact'
+    | '/mcp'
     | '/privacy'
     | '/terms'
+    | '/.mcp/list-tools'
+    | '/.well-known/oauth-protected-resource'
     | '/categories/$categorySlug'
     | '/tools/$toolSlug'
     | '/categories'
     | '/tools'
+    | '/.mcp/invoke-tool/$tool'
   id:
     | '__root__'
     | '/'
     | '/contact'
+    | '/mcp'
     | '/privacy'
     | '/terms'
+    | '/.mcp/list-tools'
+    | '/.well-known/oauth-protected-resource'
     | '/categories/$categorySlug'
     | '/tools/$toolSlug'
     | '/categories/'
     | '/tools/'
+    | '/.mcp/invoke-tool/$tool'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ContactRoute: typeof ContactRoute
+  McpRoute: typeof McpRoute
   PrivacyRoute: typeof PrivacyRoute
   TermsRoute: typeof TermsRoute
+  Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
+  Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   CategoriesCategorySlugRoute: typeof CategoriesCategorySlugRoute
   ToolsToolSlugRoute: typeof ToolsToolSlugRoute
   CategoriesIndexRoute: typeof CategoriesIndexRoute
   ToolsIndexRoute: typeof ToolsIndexRoute
+  Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -150,6 +205,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/mcp': {
+      id: '/mcp'
+      path: '/mcp'
+      fullPath: '/mcp'
+      preLoaderRoute: typeof McpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/privacy': {
       id: '/privacy'
       path: '/privacy'
@@ -162,6 +224,20 @@ declare module '@tanstack/react-router' {
       path: '/terms'
       fullPath: '/terms'
       preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/.mcp/list-tools': {
+      id: '/.mcp/list-tools'
+      path: '/.mcp/list-tools'
+      fullPath: '/.mcp/list-tools'
+      preLoaderRoute: typeof Char91DotmcpChar93ListToolsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/.well-known/oauth-protected-resource': {
+      id: '/.well-known/oauth-protected-resource'
+      path: '/.well-known/oauth-protected-resource'
+      fullPath: '/.well-known/oauth-protected-resource'
+      preLoaderRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/categories/': {
@@ -192,18 +268,30 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ToolsToolSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/.mcp/invoke-tool/$tool': {
+      id: '/.mcp/invoke-tool/$tool'
+      path: '/.mcp/invoke-tool/$tool'
+      fullPath: '/.mcp/invoke-tool/$tool'
+      preLoaderRoute: typeof Char91DotmcpChar93InvokeToolToolRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ContactRoute: ContactRoute,
+  McpRoute: McpRoute,
   PrivacyRoute: PrivacyRoute,
   TermsRoute: TermsRoute,
+  Char91DotmcpChar93ListToolsRoute: Char91DotmcpChar93ListToolsRoute,
+  Char91DotwellKnownChar93OauthProtectedResourceRoute:
+    Char91DotwellKnownChar93OauthProtectedResourceRoute,
   CategoriesCategorySlugRoute: CategoriesCategorySlugRoute,
   ToolsToolSlugRoute: ToolsToolSlugRoute,
   CategoriesIndexRoute: CategoriesIndexRoute,
   ToolsIndexRoute: ToolsIndexRoute,
+  Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
