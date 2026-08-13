@@ -1,5 +1,6 @@
-/// <reference types="vite/client" />
-import { createRootRoute, HeadContent, Outlet, Scripts } from "@tanstack/react-router";
+// <reference types="vite/client" />
+import { createRootRoute, Outlet } from "@tanstack/react-router";
+import { HeadContent, Scripts } from "@tanstack/react-start";
 import appCss from "../styles.css?url";
 
 // Root route: global head metadata + document shell
@@ -30,9 +31,7 @@ export const Route = createRootRoute({
           "Free online tools for everyday tasks — text, images, PDFs, calculators, developer utilities and more. Fast, simple and free to use.",
       },
       { property: "og:url", content: "https://the-atlas-tools.vercel.app/" },
-      { name: "google-site-verification", content: "egQ6DJ--CZ7E8TPgch5JhGBqXwrt1K8m394VReZs1qg" },
     ],
-    links: [{ rel: "stylesheet", href: appCss }],
   }),
   shellComponent: RootDocument,
   component: Outlet,
@@ -40,10 +39,8 @@ export const Route = createRootRoute({
 
 function RootDocument() {
   return (
-    <html lang="en" className="dark">
-      <head>
-        <HeadContent />
-      </head>
+    <html lang="en">
+      <HeadContent />
       <body>
         <Outlet />
         <Scripts />
