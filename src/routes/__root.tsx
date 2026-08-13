@@ -1,10 +1,13 @@
-import React from "react";
-import { createRootRoute, Outlet } from "@tanstack/react-router";
+/// <reference types="vite/client" />
+import { createRootRoute, HeadContent, Outlet, Scripts } from "@tanstack/react-router";
+import appCss from "../styles.css?url";
 
-// Root route: provide global head metadata and render nested routes via Outlet
+// Root route: global head metadata + document shell
 export const Route = createRootRoute({
   head: () => ({
     meta: [
+      { charSet: "utf-8" },
+      { name: "viewport", content: "width=device-width, initial-scale=1.0" },
       { title: "Atlas Tools — 100+ Free Online Tools" },
       {
         name: "description",
@@ -29,14 +32,22 @@ export const Route = createRootRoute({
       { property: "og:url", content: "https://the-atlas-tools.vercel.app/" },
       { name: "google-site-verification", content: "egQ6DJ--CZ7E8TPgch5JhGBqXwrt1K8m394VReZs1qg" },
     ],
+    links: [{ rel: "stylesheet", href: appCss }],
   }),
-  component: Root,
+  shellComponent: RootDocument,
+  component: Outlet,
 });
 
-function Root() {
+function RootDocument() {
   return (
-    <div style={{ minHeight: "100vh" }}>
-      <Outlet />
-    </div>
+    <html lang="en" className="dark">
+      <head>
+        <HeadContent />
+      </head>
+      <body>
+        <Outlet />
+        <Scripts />
+      </body>
+    </html>
   );
 }
