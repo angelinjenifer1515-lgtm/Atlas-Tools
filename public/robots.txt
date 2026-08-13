@@ -1,3 +1,4 @@
+robots exclusion rules
 User-agent: Googlebot
 Allow: /
 
@@ -12,3 +13,5 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+Sitemap: https://the-atlas-tools.vercel.app/sitemap.xml
