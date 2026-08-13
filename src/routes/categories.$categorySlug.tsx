@@ -14,7 +14,7 @@ export const Route = createFileRoute("/categories/$categorySlug")({
       return { meta: [{ title: "Category not found — Atlas Tools" }, { name: "robots", content: "noindex" }] };
     }
     const { category } = loaderData;
-    const title = `${category.name} — Free Online ${category.name} | Atlas`;
+    const title = `${category.name} — Free Online ${category.name} | Atlas Tools`;
     return {
       meta: [
         { title },
@@ -23,6 +23,7 @@ export const Route = createFileRoute("/categories/$categorySlug")({
         { property: "og:description", content: category.desc },
         { property: "og:type", content: "website" },
         { name: "twitter:card", content: "summary_large_image" },
+        { property: "og:url", content: `https://the-atlas-tools.vercel.app/categories/${category.slug}` },
       ],
     };
   },

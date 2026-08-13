@@ -13,22 +13,28 @@ import { useAssignFloating } from "@/hooks/useAssignFloating";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Atlas Tools — Everything. Beautifully Organized." },
+      { title: "Atlas Tools — 100+ Free Online Tools" },
       {
         name: "description",
         content:
-          "Hundreds of beautifully crafted online utilities. Completely free, no sign-ups, no downloads, everything runs instantly in your browser. New possibilities, continuously added.",
+          "Free online tools for everyday tasks — text, images, PDFs, calculators, developer utilities and more. Fast, simple and free to use.",
       },
-      { property: "og:title", content: "Atlas Tools — Everything. Beautifully Organized." },
+      { property: "og:title", content: "Atlas Tools — 100+ Free Online Tools" },
       {
         property: "og:description",
         content:
-          "Hundreds of beautifully crafted online utilities. Completely free, no sign-ups, no downloads, everything runs instantly in your browser. New possibilities, continuously added.",
+          "Free online tools for everyday tasks — text, images, PDFs, calculators, developer utilities and more. Fast, simple and free to use.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:site_name", content: "Atlas Tools" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Atlas Tools" },
-      { name: "twitter:description", content: "Hundreds of beautifully crafted online utilities. Completely free, no sign-ups, no downloads, everything runs instantly in your browser. New possibilities, continuously added." },
+      { name: "twitter:title", content: "Atlas Tools — 100+ Free Online Tools" },
+      {
+        name: "twitter:description",
+        content:
+          "Free online tools for everyday tasks — text, images, PDFs, calculators, developer utilities and more. Fast, simple and free to use.",
+      },
+      { property: "og:url", content: "https://the-atlas-tools.vercel.app/" },
     ],
   }),
   component: Index,

@@ -5,16 +5,18 @@ import { CATEGORIES, toolsInCategory } from "@/lib/tools/registry";
 export const Route = createFileRoute("/tools/")({
   head: () => ({
     meta: [
-      { title: "All Tools — 100+ Free Browser Utilities | Atlas" },
+      { title: "All Tools — 100+ Free Online Tools | Atlas Tools" },
       {
         name: "description",
         content:
           "Browse every Atlas tool: image, PDF, text, calculators, AI, developer and business utilities. Free, private and instant in your browser.",
       },
-      { property: "og:title", content: "All Tools — Atlas" },
+      { property: "og:title", content: "All Tools — 100+ Free Online Tools | Atlas Tools" },
       { property: "og:description", content: "Every Atlas utility in one directory. Free forever." },
       { property: "og:type", content: "website" },
+      { property: "og:site_name", content: "Atlas Tools" },
       { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:url", content: "https://the-atlas-tools.vercel.app/tools" },
     ],
   }),
   component: ToolsIndex,

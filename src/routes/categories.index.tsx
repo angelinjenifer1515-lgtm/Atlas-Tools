@@ -6,16 +6,18 @@ import { CATEGORIES, toolsInCategory } from "@/lib/tools/registry";
 export const Route = createFileRoute("/categories/")({
   head: () => ({
     meta: [
-      { title: "Tool Categories — Browse by Type | Atlas" },
+      { title: "Tool Categories — Browse by Type | Atlas Tools" },
       {
         name: "description",
         content:
           "Explore Atlas tool categories: image, PDF, text, calculators, AI, developer and business utilities — all free and browser-based.",
       },
-      { property: "og:title", content: "Tool Categories — Atlas" },
+      { property: "og:title", content: "Tool Categories — Atlas Tools" },
       { property: "og:description", content: "Seven categories, over a hundred free browser tools." },
       { property: "og:type", content: "website" },
+      { property: "og:site_name", content: "Atlas Tools" },
       { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:url", content: "https://the-atlas-tools.vercel.app/categories" },
     ],
   }),
   component: CategoriesIndex,

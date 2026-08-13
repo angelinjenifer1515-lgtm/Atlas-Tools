@@ -16,7 +16,7 @@ export const Route = createFileRoute("/tools/$toolSlug")({
       return { meta: [{ title: "Tool not found — Atlas Tools" }, { name: "robots", content: "noindex" }] };
     }
     const { tool } = loaderData;
-    const title = `${tool.name} — Free Online Tool | Atlas`;
+    const title = `${tool.name} — Free Online Tool | Atlas Tools`;
     return {
       meta: [
         { title },
@@ -25,6 +25,7 @@ export const Route = createFileRoute("/tools/$toolSlug")({
         { property: "og:description", content: tool.desc },
         { property: "og:type", content: "website" },
         { name: "twitter:card", content: "summary_large_image" },
+        { property: "og:url", content: `https://the-atlas-tools.vercel.app/tools/${tool.slug}` },
       ],
     };
   },
