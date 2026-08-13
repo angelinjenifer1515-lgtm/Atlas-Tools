@@ -1,0 +1,97 @@
+{
+  "version": 1,
+  "sdk_version": "0.26.2",
+  "path": "/mcp",
+  "auth": {
+    "type": "none"
+  },
+  "mcp": {
+    "server": {
+      "name": "peek-ahead",
+      "version": "0.1.0",
+      "title": "Peek Ahead"
+    },
+    "tools": [
+      {
+        "name": "list_categories",
+        "title": "List tool categories",
+        "description": "List every Atlas Tools category with its description and tool count.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "search_tools",
+        "title": "Search tools",
+        "description": "Search the Atlas Tools catalog by keyword and/or category. Returns matching tools with their slugs and page paths.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "query": {
+              "description": "Keyword matched against tool name and description.",
+              "type": "string"
+            },
+            "category": {
+              "description": "Restrict results to one category.",
+              "type": "string",
+              "enum": [
+                "image-tools",
+                "pdf-tools",
+                "text-tools",
+                "calculators",
+                "ai-tools",
+                "developer-tools",
+                "business-tools"
+              ]
+            },
+            "limit": {
+              "description": "Maximum number of results (default 20).",
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            }
+          }
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_tool",
+        "title": "Get tool details",
+        "description": "Get full details for one Atlas Tools utility by slug, including its category, page path and related tools.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "slug": {
+              "type": "string",
+              "description": "Tool slug, e.g. 'word-counter'."
+            }
+          },
+          "required": [
+            "slug"
+          ]
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}

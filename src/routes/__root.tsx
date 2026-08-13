@@ -1,8 +1,8 @@
 import React from "react";
-import { createFileRoute, Outlet } from "@tanstack/react-router";
+import { createRootRoute, Outlet } from "@tanstack/react-router";
 
 // Root route: provide global head metadata and render nested routes via Outlet
-export const Route = createFileRoute("/")({
+export const Route = createRootRoute({
   head: () => ({
     meta: [
       { title: "Atlas Tools — 100+ Free Online Tools" },
