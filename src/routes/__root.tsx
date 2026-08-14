@@ -1,6 +1,11 @@
 // <reference types="vite/client" />
-import { createRootRoute, Outlet } from "@tanstack/react-router";
-import { HeadContent, Scripts } from "@tanstack/react-start";
+import type { ReactNode } from "react";
+import {
+  createRootRoute,
+  HeadContent,
+  Outlet,
+  Scripts,
+} from "@tanstack/react-router";
 import appCss from "../styles.css?url";
 
 // Root route: global head metadata + document shell
@@ -37,12 +42,14 @@ export const Route = createRootRoute({
   component: Outlet,
 });
 
-function RootDocument() {
+function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
   return (
     <html lang="en">
-      <HeadContent />
+      <head>
+        <HeadContent />
+      </head>
       <body>
-        <Outlet />
+        {children}
         <Scripts />
       </body>
     </html>
