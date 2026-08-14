@@ -37,6 +37,7 @@ export const Route = createRootRoute({
       },
       { property: "og:url", content: "https://the-atlas-tools.vercel.app/" },
     ],
+    links: [{ rel: "stylesheet", href: appCss }],
   }),
   shellComponent: RootDocument,
   component: Outlet,
